@@ -26,15 +26,39 @@ app.set("view engine", "ejs");
 mongoose.Promise = global.Promise;
 mongoose.connect("mongodb://localhost/atlamaya", {useMongoClient: true});
 
+
+//Passport
+app.use(require("express-session")({
+	secret: "Every thing counts in the world",
+	resave: false,
+	saveUninitialized: false
+}));   
+app.use(passport.initialize());
+app.use(passport.session());
+
+passport.use(new LocalStrategy(User.authenticate()));
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+
 //Body Parser
 app.use(bodyParser.urlencoded({extended: true}));
-
-
 
 
 app.get("/", function(req, res){
     res.render("home");
 });
+
+
+//===============================
+//Authentication
+//===============================
+
+app.get("/register", function(req, res){
+	res.render("register");	
+});
+
+
+
 
 
 app.listen(process.env.PORT, process.env.IP, function(){
