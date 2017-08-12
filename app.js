@@ -91,6 +91,20 @@ app.post("/login", passport.authenticate("local",{
     
 });
 
+//LOGOUT
+app.get("/logout", function(req, res) {
+    req.logout();
+    res.redirect("/login");
+});
+
+//MIDDLEWARE
+function isLoggedIn(req, res, next){
+    if(req.isAuthenticated()){
+        return next();
+    }
+    res.redirect("/login");
+}	
+
 
 
 
