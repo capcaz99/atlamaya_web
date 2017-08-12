@@ -53,10 +53,36 @@ app.get("/", function(req, res){
 //Authentication
 //===============================
 
+//REGISTER
 app.get("/register", function(req, res){
 	res.render("register");	
 });
 
+app.post("/register", function(req, res){
+	  User.register(new User({
+	  						    username  : req.body.username,
+	  							address   : req.body.address,
+	  							phone     : req.body.phone,
+	  							reference : req.body.reference,
+	  							blocked   : req.body.blocked,
+	  							admin     : req.body.admin
+							}
+	  		), req.body.password, function(err, user){
+        if(err){
+            console.log(err);    //Falta manejar errores
+            res.render("register");
+        }else{
+            passport.authenticate("local")(req, res, function(){
+               res.render("home"); 
+            });
+        }
+    });
+});
+
+//LOGIN
+app.get("/login", function(req, res) {
+    res.render("login");
+})
 
 
 

@@ -3,10 +3,20 @@
 <form method="POST" action="/register">
     <input type="text" placeholder="Nombre de Usuario" name="username">
     <input type="password" placeholder="Contrase&ntilde;a" name="password">
-    <input type="text" placeholder="Direcci&oacute;n" name="adress">
+    <input type="text" placeholder="Direcci&oacute;n" name="address">
     <input type="number" placeholder="Tel&eacute;fono" name="phone">
     <input type="text" placeholder="Referencia" name="reference">
-    <input type="checkbox" placeholder="Bloqueado" name="blocked">Bloqueado
-    <input type="checkbox" placeholder="Administrador" name="admin">Administrador
+    <span>Bloqueado</span>
+    <select name="blocked"> 
+        <option value="true">Si</option>
+        <option value="false">No</option>
+    
+    </select>
+    <span>Administrador</span>
+    <select name="admin" placeholder="Administrador"> 
+        <option value="true">Si</option>
+        <option value="false">No</option>
+    
+    </select>
     <button>Añadir</button>
 </form>
