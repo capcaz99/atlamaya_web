@@ -44,6 +44,10 @@ passport.deserializeUser(User.deserializeUser());
 app.use(bodyParser.urlencoded({extended: true}));
 
 
+//===============================
+//Home
+//===============================
+
 app.get("/", function(req, res){
     res.render("home");
 });
@@ -106,6 +110,13 @@ function isLoggedIn(req, res, next){
 }	
 
 
+//===============================
+//Admin
+//===============================
+
+app.get("/administrador", function(req, res) {
+    res.render("administrador");
+});
 
 
 app.listen(process.env.PORT, process.env.IP, function(){
