@@ -29,15 +29,14 @@ mongoose.connect("mongodb://localhost/atlamaya", {useMongoClient: true});
 //Body Parser
 app.use(bodyParser.urlencoded({extended: true}));
 
-//Passport
-app.use(require("express-session")({
-	secret: "Every thing counts in the world",
-	resave: false,
-	saveUninitialized: false
-}));   
-app.use(passport.initialize());
-app.use(passport.session());
 
-passport.use(new LocalStrategy(User.authenticate()));
-passport.serializeUser(User.serializeUser());
-passport.deserializeUser(User.deserializeUser());
+
+
+app.get("/", function(req, res){
+    res.render("home");
+});
+
+
+app.listen(process.env.PORT, process.env.IP, function(){
+    console.log("Server has started");
+});
