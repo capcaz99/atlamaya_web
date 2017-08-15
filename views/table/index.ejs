@@ -8,10 +8,13 @@
 	<div class="jumbotron"> 
 		<h1>Mesa Directiva</h1>
 		<h3>Aqu&iacute; podr&aacute;s encontrar los datos de la mesa directiva</h3>
+		<% if(user.admin){ %>
+		<div class="row">
+		    <a href="/table/new" class="btn btn-success">Agregar nuevo</a>
+		</div>
+        <% } %>
 	</div>
 </div>
-
-<a href="/table/new">Agregar nuevo</a>
 
 <div class="container">
 	<div class="row">
@@ -26,10 +29,17 @@
         				    <h1><%= table.name %></h1>
         				    <h3><%= table.job %></h3>
         				    <% if(user.admin){ %>
-        				        <input type="button" onclick="location.href='/table/<%=table._id%>/edit';" value="Editar" />
-        				        <form method="POST" action="/table/<%=table._id%>?_method=DELETE">
-        				        <button >Delete</button>
-        				    </form>
+        				    <div class="row">
+        				        <div class="col-xs-2">
+            				        <input type="button" class="btn btn-info"onclick="location.href='/table/<%=table._id%>/edit';" value="Editar" />
+            				    </div>
+            				    <div class="col-xs-2">
+            				        <form method="POST" action="/table/<%=table._id%>?_method=DELETE">
+            				            <button class="btn btn-danger">Eliminar</button>
+            				        </form>
+            				    </div>    
+            				    
+        				    </div>
         				    <% } %>
         				    
         				</div>
