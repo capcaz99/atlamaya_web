@@ -49,7 +49,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 //Home
 //===============================
 
-app.get("/", function(req, res){
+app.get("/", isLoggedIn, function(req, res){
     res.render("home");
 });
 
@@ -115,7 +115,7 @@ function isLoggedIn(req, res, next){
 //Admin
 //===============================
 
-app.get("/administrador", function(req, res) {
+app.get("/administrador", isLoggedIn, function(req, res) {
     res.render("administrador");
 });
 
@@ -130,7 +130,7 @@ app.listen(process.env.PORT, process.env.IP, function(){
 //===============================
 
 //Index
-app.get("/table", function(req, res) {
+app.get("/table", isLoggedIn, function(req, res) {
 	Table.find({}, function(err, table){
 		if(err){
 			console.log(err);
@@ -142,12 +142,12 @@ app.get("/table", function(req, res) {
 })
 
 //New
-app.get("/table/new", function(req, res) {
+app.get("/table/new", isLoggedIn, function(req, res) {
     res.render("table/new");
 });
 
 //Create
-app.post("/table", function(req, res){
+app.post("/table", isLoggedIn, function(req, res){
 	Table.create(req.body.table, function(err, table){
 		if(err){
 			console.log(err);
@@ -158,7 +158,7 @@ app.post("/table", function(req, res){
 });
 
 //Edit
-app.get("/table/:id/edit", function(req, res) {
+app.get("/table/:id/edit", isLoggedIn, function(req, res) {
     Table.findById(req.params.id, function(err, table){
     	if(err){
     		console.log(err);
@@ -169,7 +169,7 @@ app.get("/table/:id/edit", function(req, res) {
 });
 
 //Update
-app.put("/table/:id", function(req, res){
+app.put("/table/:id", isLoggedIn,function(req, res){
 	Table.findByIdAndUpdate(req.params.id, req.body.table, function(err, table){
 		if(err){
 			console.log(err);
