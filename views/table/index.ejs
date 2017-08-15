@@ -25,10 +25,13 @@
         				<div class="col-xs-8">
         				    <h1><%= table.name %></h1>
         				    <h3><%= table.job %></h3>
-        				    <input type="button" onclick="location.href='/table/<%=table._id%>/edit';" value="Editar" />
-        				    <form method="POST" action="/table/<%=table._id%>?_method=DELETE">
+        				    <% if(user.admin){ %>
+        				        <input type="button" onclick="location.href='/table/<%=table._id%>/edit';" value="Editar" />
+        				        <form method="POST" action="/table/<%=table._id%>?_method=DELETE">
         				        <button >Delete</button>
         				    </form>
+        				    <% } %>
+        				    
         				</div>
         			</div>	
         		</div>

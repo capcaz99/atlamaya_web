@@ -16,7 +16,7 @@ var passportLocalMongoose = require("passport-local-mongoose"),
 	app                   = express();
 
 
-
+//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Falta manejo de errores
 
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({extended: true}));
@@ -50,7 +50,8 @@ app.use(bodyParser.urlencoded({extended: true}));
 //===============================
 
 app.get("/", isLoggedIn, function(req, res){
-    res.render("home");
+	var user = req.user;
+    res.render("home", {user: user});
 });
 
 
@@ -116,7 +117,12 @@ function isLoggedIn(req, res, next){
 //===============================
 
 app.get("/administrador", isLoggedIn, function(req, res) {
-    res.render("administrador");
+	if(req.user.admin){
+		res.render("administrador");
+	}else{
+		res.redirect("/"); //%%%%%%%%%%%%%Agregar mensaje de error
+	}
+    
 });
 
 
@@ -131,11 +137,12 @@ app.listen(process.env.PORT, process.env.IP, function(){
 
 //Index
 app.get("/table", isLoggedIn, function(req, res) {
+	var user = req.user;
 	Table.find({}, function(err, table){
 		if(err){
 			console.log(err);
 		}else{
-			res.render("table/index", {table: table});	
+			res.render("table/index", {table: table, user: user});	
 		}
 	})
     
@@ -143,7 +150,12 @@ app.get("/table", isLoggedIn, function(req, res) {
 
 //New
 app.get("/table/new", isLoggedIn, function(req, res) {
-    res.render("table/new");
+	if(req.user.admin){
+		res.render("table/new");
+	}else{
+		res.redirect("/table");
+	}
+    
 });
 
 //Create
@@ -159,17 +171,22 @@ app.post("/table", isLoggedIn, function(req, res){
 
 //Edit
 app.get("/table/:id/edit", isLoggedIn, function(req, res) {
-    Table.findById(req.params.id, function(err, table){
+	if(req.user.admin){
+		 Table.findById(req.params.id, function(err, table){
     	if(err){
     		console.log(err);
     	}else{
     		res.render("table/edit",{table: table});
     	}
     });
+	}else{
+		res.redirect("/table");
+	}
+   
 });
 
 //Update
-app.put("/table/:id", isLoggedIn,function(req, res){
+app.put("/table/:id", isLoggedIn, function(req, res){
 	Table.findByIdAndUpdate(req.params.id, req.body.table, function(err, table){
 		if(err){
 			console.log(err);
@@ -180,7 +197,7 @@ app.put("/table/:id", isLoggedIn,function(req, res){
 });
 
 //Destroy
-app.delete("/table/:id", function(req, res){
+app.delete("/table/:id", isLoggedIn, function(req, res){
 	Table.findByIdAndRemove(req.params.id, function(err){
 		if(err){
 			console.log(err);
