@@ -1,0 +1,39 @@
+<% include ../partials/header %>
+
+
+
+
+
+<div class="container">
+	<div class="jumbotron"> 
+		<h1>Mesa Directiva</h1>
+		<h3>Aqu&iacute; podr&aacute;s encontrar los datos de la mesa directiva</h3>
+	</div>
+</div>
+
+<a href="/table/new">Agregar nuevo</a>
+
+<div class="container">
+	<div class="row">
+        <% table.forEach(function(table){ %>
+            <div class="col-xs-6">
+        	    <div class="thumbnail">
+        		    <div class="row">
+        			    <div class="col-xs-4">
+        			        <img src="<%= table.image %>" class="img-responsive img-rounded" alt="Responsive image" id="image">
+                        </div>
+        				<div class="col-xs-8">
+        				    <h1><%= table.name %></h1>
+        				    <h3><%= table.job %></h3>
+        				    <input type="button" onclick="location.href='/table/<%=table._id%>/edit';" value="Editar" />
+        				    <form method="POST" action="/table/<%=table._id%>?_method=DELETE">
+        				        <button >Delete</button>
+        				    </form>
+        				</div>
+        			</div>	
+        		</div>
+        	</div>
+        <% }) %>
+    </div>
+</div>
+<% include ../partials/footer %>

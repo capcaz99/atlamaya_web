@@ -21,6 +21,7 @@ var passportLocalMongoose = require("passport-local-mongoose"),
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");
+app.use(methodOverride("_method"));
 
 //Mongoose
 mongoose.Promise = global.Promise;
@@ -121,4 +122,70 @@ app.get("/administrador", function(req, res) {
 
 app.listen(process.env.PORT, process.env.IP, function(){
     console.log("Server has started");
+});
+
+
+//===============================
+//Table
+//===============================
+
+//Index
+app.get("/table", function(req, res) {
+	Table.find({}, function(err, table){
+		if(err){
+			console.log(err);
+		}else{
+			res.render("table/index", {table: table});	
+		}
+	})
+    
+})
+
+//New
+app.get("/table/new", function(req, res) {
+    res.render("table/new");
+});
+
+//Create
+app.post("/table", function(req, res){
+	Table.create(req.body.table, function(err, table){
+		if(err){
+			console.log(err);
+		}else{
+			res.redirect("/table");
+		}
+	})
+});
+
+//Edit
+app.get("/table/:id/edit", function(req, res) {
+    Table.findById(req.params.id, function(err, table){
+    	if(err){
+    		console.log(err);
+    	}else{
+    		res.render("table/edit",{table: table});
+    	}
+    });
+});
+
+//Update
+app.put("/table/:id", function(req, res){
+	Table.findByIdAndUpdate(req.params.id, req.body.table, function(err, table){
+		if(err){
+			console.log(err);
+		}else{
+			res.redirect("/table");
+		}
+	});
+});
+
+//Destroy
+app.delete("/table/:id", function(req, res){
+	Table.findByIdAndRemove(req.params.id, function(err){
+		if(err){
+			console.log(err);
+		}else{
+			res.redirect("/table");
+		}
+	});
 });
