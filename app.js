@@ -15,6 +15,10 @@ var passportLocalMongoose = require("passport-local-mongoose"),
 	request               = require("request"),
 	app                   = express();
 
+var maintenanceRoutes = require("./routes/maintenance"),
+	adminRoutes 	  = require("./routes/admin"),
+	indexRoutes 	  = require("./routes/index"),
+	tableRoutes	      = require("./routes/table");
 
 //%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Falta manejo de errores
 
@@ -45,85 +49,13 @@ passport.deserializeUser(User.deserializeUser());
 app.use(bodyParser.urlencoded({extended: true}));
 
 
-//===============================
-//Home
-//===============================
-
-app.get("/", isLoggedIn, function(req, res){
-	var user = req.user;
-    res.render("home", {user: user});
-});
+//Routes
+app.use("/maintenance",maintenanceRoutes);
+app.use(indexRoutes);
+app.use("/table",tableRoutes);
+app.use(adminRoutes);
 
 
-//===============================
-//Authentication
-//===============================
-
-//REGISTER
-app.get("/register", function(req, res){
-	res.render("register");	
-});
-
-app.post("/register", function(req, res){
-	  User.register(new User({
-	  						    username  : req.body.username,
-	  							address   : req.body.address,
-	  							phone     : req.body.phone,
-	  							reference : req.body.reference,
-	  							blocked   : req.body.blocked,
-	  							admin     : req.body.admin
-							}
-	  		), req.body.password, function(err, user){
-        if(err){
-            console.log(err);    //Falta manejar errores
-            res.render("register");
-        }else{
-            passport.authenticate("local")(req, res, function(){
-               res.render("home"); 
-            });
-        }
-    });
-});
-
-//LOGIN
-app.get("/login", function(req, res) {
-    res.render("login");
-});
-
-app.post("/login", passport.authenticate("local",{
-    successRedirect: "/",
-    failureRedirect: "/login"
-}), function(req, res){
-    
-});
-
-//LOGOUT
-app.get("/logout", function(req, res) {
-    req.logout();
-    res.redirect("/login");
-});
-
-//MIDDLEWARE
-function isLoggedIn(req, res, next){
-    if(req.isAuthenticated()){
-        return next();
-    }
-    res.redirect("/login");
-}	
-
-
-//===============================
-//Admin
-//===============================
-
-app.get("/administrador", isLoggedIn, function(req, res) {
-	if(req.user.admin){
-		res.render("administrador");
-	}else{
-		res.redirect("/"); //%%%%%%%%%%%%%Agregar mensaje de error
-	}
-    
-});
 
 
 app.listen(process.env.PORT, process.env.IP, function(){
@@ -131,179 +63,3 @@ app.listen(process.env.PORT, process.env.IP, function(){
 });
 
 
-//===============================
-//Table
-//===============================
-
-//Index
-app.get("/table", isLoggedIn, function(req, res) {
-	var user = req.user;
-	Table.find({}, function(err, table){
-		if(err){
-			console.log(err);
-		}else{
-			res.render("table/index", {table: table, user: user});	
-		}
-	})
-    
-})
-
-//New
-app.get("/table/new", isLoggedIn, function(req, res) {
-	if(req.user.admin){
-		res.render("table/new");
-	}else{
-		res.redirect("/table");
-	}
-    
-});
-
-//Create
-app.post("/table", isLoggedIn, function(req, res){
-	Table.create(req.body.table, function(err, table){
-		if(err){
-			console.log(err);
-		}else{
-			res.redirect("/table");
-		}
-	})
-});
-
-//Edit
-app.get("/table/:id/edit", isLoggedIn, function(req, res) {
-	if(req.user.admin){
-		 Table.findById(req.params.id, function(err, table){
-    	if(err){
-    		console.log(err);
-    	}else{
-    		res.render("table/edit",{table: table});
-    	}
-    });
-	}else{
-		res.redirect("/table");
-	}
-   
-});
-
-//Update
-app.put("/table/:id", isLoggedIn, function(req, res){
-	Table.findByIdAndUpdate(req.params.id, req.body.table, function(err, table){
-		if(err){
-			console.log(err);
-		}else{
-			res.redirect("/table");
-		}
-	});
-});
-
-//Destroy
-app.delete("/table/:id", isLoggedIn, function(req, res){
-	Table.findByIdAndRemove(req.params.id, function(err){
-		if(err){
-			console.log(err);
-		}else{
-			res.redirect("/table");
-		}
-	});
-});
-
-
-//===============================
-//Maintenance
-//===============================
-
-
-//Index Security
-app.get("/maintenance/security", isLoggedIn, function(req, res) {
-	var user = req.user;
-	Maintenance.find({job: "true"}, function(err, maintenance){
-		if(err){
-			console.log(err);
-		}else{
-			res.render("maintenance/indexSecurity", {maintenance: maintenance, user: user});	
-		}
-	});
-    
-});
-
-//Index Maintenance
-app.get("/maintenance", isLoggedIn, function(req, res) {
-	var user = req.user;
-	Table.find({job: "false"}, function(err, maintenance){
-		if(err){
-			console.log(err);
-		}else{
-			res.render("maintenance/indexMaintenance", {maintenance: maintenance, user: user});	
-		}
-	});
-    
-});
-
-//New
-app.get("/maintenance/new", isLoggedIn, function(req, res) {
-	if(req.user.admin){
-		res.render("maintenance/new");
-	}else{
-		res.redirect("/maintenance");
-	}
-    
-});
-
-//Create
-app.post("/maintenance", isLoggedIn, function(req, res){
-	Maintenance.create(req.body.maintenance, function(err, maintenance){
-		if(err){
-			console.log(err);
-		}else{
-			if(req.body.maintenance.job){
-				res.redirect("/maintenance/security");
-				
-			}else{
-				res.redirect("/maintenance");
-			}
-		}
-	})
-});
-
-//Edit
-app.get("/maintenance/:id/edit", isLoggedIn, function(req, res) {
-	if(req.user.admin){
-		 Table.findById(req.params.id, function(err, table){
-    	if(err){
-    		console.log(err);
-    	}else{
-    		res.render("maintenance/edit",{table: table});
-    	}
-    });
-	}else{
-		res.redirect("/maintenance");
-	}
-   
-});
-
-//Update
-app.put("/maintenance/:id", isLoggedIn, function(req, res){
-	Table.findByIdAndUpdate(req.params.id, req.body.table, function(err, table){
-		if(err){
-			console.log(err);
-		}else{
-			if(req.body.maintenance.job){
-				res.redirect("/maintenance/security");
-				
-			}else{
-				res.redirect("/maintenance");
-			}
-		}
-	});
-});
-
-//Destroy
-app.delete("/maintenance/:id", isLoggedIn, function(req, res){
-	Table.findByIdAndRemove(req.params.id, function(err){
-		if(err){
-			console.log(err);
-		}else{
-			res.redirect("/maintenance");
-		}
-	});
-});
