@@ -33,13 +33,13 @@ router.get("/new", isLoggedIn, function(req, res) {
 //Create
 router.post("/", isLoggedIn, function(req, res){
     
-	Maintenance.create(req.body.maintenance, function(err, maintenance){
-		if(err){
-			console.log(err);
-		}else{
-			res.redirect("/maintenance");
-		}
-	});
+    	Maintenance.create(req.body.maintenance, function(err, maintenance){
+    		if(err){
+    			console.log(err);
+    		}else{
+    			res.redirect("/maintenance");
+    		}
+    	});
 });
 
 

@@ -23,7 +23,12 @@ router.get("/", isLoggedIn, function(req, res){
 
 //REGISTER
 router.get("/register", function(req, res){
-	res.render("index/register");	
+    if(req.user.admin){
+        res.render("index/register");	
+    }else{
+        res.redirect("/");
+    }
+	
 });
 
 router.post("/register", function(req, res){
