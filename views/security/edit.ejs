@@ -1,0 +1,11 @@
+<% include ../partials/header %>
+
+
+<form method="POST" action="/security/<%=security._id%>?_method=PUT">
+    <input type="text" value="<%=security.name%>" name="security[name]">
+    <input type="text" value="<%=security.job%>" name="security[job]">
+    <input type="text" value="<%=security.image%>" name="security[image]">
+    <button>Aceptar</button>
+</form>
+
+<% include ../partials/footer %>

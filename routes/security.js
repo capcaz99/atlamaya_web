@@ -1,20 +1,21 @@
-var Maintenance = require("../models/maintenance"),
+var Security = require("../models/security"),
     express     = require("express"),
     router      = express.Router({mergeParams: true});
     
     
+    
 //===============================
-//Maintenance
+//Secutiry
 //===============================
 
-//Index 
+//Index    
 router.get("/", isLoggedIn, function(req, res) {
 	var user = req.user;
-	Maintenance.find({} , function(err, maintenance){
+	Security.find({}, function(err, security){
 		if(err){
 			console.log(err);
 		}else{
-			res.render("maintenance/index", {maintenance: maintenance, user: user});	
+			res.render("security/index", {security: security, user: user});	
 		}
 	});
     
@@ -23,49 +24,48 @@ router.get("/", isLoggedIn, function(req, res) {
 //New
 router.get("/new", isLoggedIn, function(req, res) {
 	if(req.user.admin){
-		res.render("maintenance/new");
+		res.render("security/new");
 	}else{
-		res.redirect("/maintenance");
+		res.redirect("/security");
 	}
     
 });
+
 
 //Create
 router.post("/", isLoggedIn, function(req, res){
     
-	Maintenance.create(req.body.maintenance, function(err, maintenance){
+Security.create(req.body.security, function(err, security){
 		if(err){
 			console.log(err);
 		}else{
-			res.redirect("/maintenance");
+			res.redirect("/security");
 		}
 	});
 });
 
-
 //Edit
 router.get("/:id/edit", isLoggedIn, function(req, res) {
 	if(req.user.admin){
-		 Maintenance.findById(req.params.id, function(err, maintenance){
+		 Security.findById(req.params.id, function(err, security){
     	if(err){
     		console.log(err);
     	}else{
-    		res.render("maintenance/edit",{maintenance: maintenance});
+    		res.render("security/edit",{security: security});
     	}
     });
 	}else{
-		res.redirect("/maintenance");
+		res.redirect("/security");
 	}
-   
 });
 
 //Update
 router.put("/:id", isLoggedIn, function(req, res){
-	Maintenance.findByIdAndUpdate(req.params.id, req.body.maintenance, function(err, maintenance){
+	Security.findByIdAndUpdate(req.params.id, req.body.security, function(err, security){
 		if(err){
 			console.log(err);
 		}else{
-		    res.redirect("/maintenance");
+		    res.redirect("/security");
 			
 		}
 	});
@@ -73,11 +73,11 @@ router.put("/:id", isLoggedIn, function(req, res){
 
 //Destroy
 router.delete("/:id", isLoggedIn, function(req, res){
-	Maintenance.findByIdAndRemove(req.params.id, function(err){
+	Security.findByIdAndRemove(req.params.id, function(err){
 		if(err){
 			console.log(err);
 		}else{
-			res.redirect("/maintenance");
+			res.redirect("/security");
 		}
 	});
 });

@@ -1,0 +1,11 @@
+<% include ../partials/header %>
+
+
+<form method="POST" action="/maintenance/<%=maintenance._id%>?_method=PUT">
+    <input type="text" value="<%=maintenance.name%>" name="maintenance[name]">
+    <input type="text" value="<%=maintenance.job%>" name="maintenance[job]">
+    <input type="text" value="<%=maintenance.image%>" name="maintenance[image]">
+    <button>Aceptar</button>
+</form>
+
+<% include ../partials/footer %>

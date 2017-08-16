@@ -1,13 +1,7 @@
 var passportLocalMongoose = require("passport-local-mongoose"),
-    Maintenance 		  = require("./models/maintenance"),
-	Regulation            = require("./models/regulation"),
-	Financial   		  = require("./models/financial"),
-	Payment               = require("./models/payment"),
-	methodOverride        = require("method-override"),
+    methodOverride        = require("method-override"),
 	LocalStrategy         = require("passport-local"),
-	Table                 = require("./models/table"),
 	User                  = require("./models/user"),
-	Ad                    = require("./models/ad"),
 	bodyParser            = require("body-parser"),
 	mongoose              = require("mongoose"),
 	passport              = require("passport"),
@@ -16,6 +10,7 @@ var passportLocalMongoose = require("passport-local-mongoose"),
 	app                   = express();
 
 var maintenanceRoutes = require("./routes/maintenance"),
+	securityRoutes    = require("./routes/security"),
 	adminRoutes 	  = require("./routes/admin"),
 	indexRoutes 	  = require("./routes/index"),
 	tableRoutes	      = require("./routes/table");
@@ -54,6 +49,7 @@ app.use("/maintenance",maintenanceRoutes);
 app.use(indexRoutes);
 app.use("/table",tableRoutes);
 app.use(adminRoutes);
+app.use("/security", securityRoutes);
 
 
 

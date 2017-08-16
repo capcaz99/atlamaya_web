@@ -10,7 +10,7 @@
 		<h3>Aqu&iacute; podr&aacute;s encontrar los datos de los polic&iacute;as del condominio</h3>
 		<% if(user.admin){ %>
 		<div class="row">
-		    <a href="/maintenance/new" class="btn btn-success">Agregar nuevo</a>
+		    <a href="/security/new" class="btn btn-success">Agregar nuevo</a>
 		</div>
         <% } %>
 	</div>
@@ -18,23 +18,23 @@
 
 <div class="container">
 	<div class="row">
-        <% maintenance.forEach(function(maintenance){ %>
+        <% security.forEach(function(security){ %>
             <div class="col-xs-6">
         	    <div class="thumbnail">
         		    <div class="row">
         			    <div class="col-xs-4">
-        			        <img src="<%= maintenance.image %>" class="img-responsive img-rounded" alt="Responsive image" id="image">
+        			        <img src="<%= security.image %>" class="img-responsive img-rounded" alt="Responsive image" id="image">
                         </div>
         				<div class="col-xs-8">
-        				    <h1><%= maintenance.name %></h1>
-        				    
+        				    <h1><%= security.name %></h1>
+        				    <h3> <%= security.job %></h3>
         				    <% if(user.admin){ %>
         				    <div class="row">
         				        <div class="col-xs-2">
-            				        <input type="button" class="btn btn-info"onclick="location.href='/maintenance/<%=maintenance._id%>/edit';" value="Editar" />
+            				        <input type="button" class="btn btn-info"onclick="location.href='/security/<%=security._id%>/edit';" value="Editar" />
             				    </div>
             				    <div class="col-xs-2">
-            				        <form method="POST" action="/maintenance/<%=maintenance._id%>?_method=DELETE">
+            				        <form method="POST" action="/security/<%=security._id%>?_method=DELETE">
             				            <button class="btn btn-danger">Eliminar</button>
             				        </form>
             				    </div>    

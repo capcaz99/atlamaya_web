@@ -4,7 +4,7 @@ var maintenanceSchema = mongoose.Schema({
     
     name: String,
     image: String,
-    job: Boolean //True Security - False Maintenance 
+    job: String
 });
 
 module.exports = mongoose.model("Maintenance", maintenanceSchema);
