@@ -206,3 +206,104 @@ app.delete("/table/:id", isLoggedIn, function(req, res){
 		}
 	});
 });
+
+
+//===============================
+//Maintenance
+//===============================
+
+
+//Index Security
+app.get("/maintenance/security", isLoggedIn, function(req, res) {
+	var user = req.user;
+	Maintenance.find({job: "true"}, function(err, maintenance){
+		if(err){
+			console.log(err);
+		}else{
+			res.render("maintenance/indexSecurity", {maintenance: maintenance, user: user});	
+		}
+	});
+    
+});
+
+//Index Maintenance
+app.get("/maintenance", isLoggedIn, function(req, res) {
+	var user = req.user;
+	Table.find({job: "false"}, function(err, maintenance){
+		if(err){
+			console.log(err);
+		}else{
+			res.render("maintenance/indexMaintenance", {maintenance: maintenance, user: user});	
+		}
+	});
+    
+});
+
+//New
+app.get("/maintenance/new", isLoggedIn, function(req, res) {
+	if(req.user.admin){
+		res.render("maintenance/new");
+	}else{
+		res.redirect("/maintenance");
+	}
+    
+});
+
+//Create
+app.post("/maintenance", isLoggedIn, function(req, res){
+	Maintenance.create(req.body.maintenance, function(err, maintenance){
+		if(err){
+			console.log(err);
+		}else{
+			if(req.body.maintenance.job){
+				res.redirect("/maintenance/security");
+				
+			}else{
+				res.redirect("/maintenance");
+			}
+		}
+	})
+});
+
+//Edit
+app.get("/maintenance/:id/edit", isLoggedIn, function(req, res) {
+	if(req.user.admin){
+		 Table.findById(req.params.id, function(err, table){
+    	if(err){
+    		console.log(err);
+    	}else{
+    		res.render("maintenance/edit",{table: table});
+    	}
+    });
+	}else{
+		res.redirect("/maintenance");
+	}
+   
+});
+
+//Update
+app.put("/maintenance/:id", isLoggedIn, function(req, res){
+	Table.findByIdAndUpdate(req.params.id, req.body.table, function(err, table){
+		if(err){
+			console.log(err);
+		}else{
+			if(req.body.maintenance.job){
+				res.redirect("/maintenance/security");
+				
+			}else{
+				res.redirect("/maintenance");
+			}
+		}
+	});
+});
+
+//Destroy
+app.delete("/maintenance/:id", isLoggedIn, function(req, res){
+	Table.findByIdAndRemove(req.params.id, function(err){
+		if(err){
+			console.log(err);
+		}else{
+			res.redirect("/maintenance");
+		}
+	});
+});
