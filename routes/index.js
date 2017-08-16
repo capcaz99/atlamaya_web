@@ -1,4 +1,4 @@
-var User    = require("../models/user"),
+var User    = require("../models/user.js"),
     passport = require("passport"),
     express = require("express"),
     router  = express.Router();
@@ -23,7 +23,7 @@ router.get("/", isLoggedIn, function(req, res){
 
 //REGISTER
 router.get("/register", function(req, res){
-	res.render("register");	
+	res.render("index/register");	
 });
 
 router.post("/register", function(req, res){
@@ -38,10 +38,10 @@ router.post("/register", function(req, res){
 	  		), req.body.password, function(err, user){
         if(err){
             console.log(err);    //Falta manejar errores
-            res.render("register");
+            res.render("index/register");
         }else{
             passport.authenticate("local")(req, res, function(){
-               res.render("home"); 
+               res.render("index/home"); 
             });
         }
     });
@@ -49,7 +49,7 @@ router.post("/register", function(req, res){
 
 //LOGIN
 router.get("/login", function(req, res) {
-    res.render("login");
+    res.render("index/login");
 });
 
 router.post("/login", passport.authenticate("local",{
