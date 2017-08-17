@@ -11,7 +11,7 @@ var User    = require("../models/user.js"),
 //Home
 //===============================
 
-router.get("/", isLoggedIn, function(req, res){
+router.get("/", function(req, res){
 	var user = req.user;
     res.render("home", {user: user});
 });

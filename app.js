@@ -10,6 +10,7 @@ var passportLocalMongoose = require("passport-local-mongoose"),
 	app                   = express();
 
 var maintenanceRoutes = require("./routes/maintenance"),
+	regulationsRoutes = require("./routes/regulations"),
 	securityRoutes    = require("./routes/security"),
 	adminRoutes 	  = require("./routes/admin"),
 	indexRoutes 	  = require("./routes/index"),
@@ -46,10 +47,13 @@ app.use(bodyParser.urlencoded({extended: true}));
 
 //Routes
 app.use("/maintenance",maintenanceRoutes);
-app.use(indexRoutes);
-app.use("/table",tableRoutes);
-app.use(adminRoutes);
+app.use("/regulation", regulationsRoutes);
 app.use("/security", securityRoutes);
+app.use("/table",tableRoutes);
+app.use(indexRoutes);
+app.use(adminRoutes);
+
+
 
 
 

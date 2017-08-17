@@ -1,10 +1,44 @@
 body{
 	padding-top: 100px;
+	font-family: 'Abel', sans-serif;
+	background: url(http://info7.blob.core.windows.net.optimalcdn.com/images/2016/11/11/631525_parque-los-olivos.jpg);
+	background-size: cover;
+	background-repeat: no-repeat; 
 }
 
+.title{
+    font-family: 'Pacifico', cursive;
+    color: white;
+    
+    font-size: 8vw;
+    margin: auto;
+    padding-top: 5vw;
+    
+}
+
+/*.line{
+    border-right: 1px solid white;
+     position: absolute;
+     top: 50%;
+     bottom: 0;
+}*/
+
+
+
+
 .navbar{
-	background: #264E86;
-	
+	background: black;
+	font-family: 'Quicksand', sans-serif;
+	opacity: 0.7;
+	margin-top: 15px;
+    
+}
+
+.dropdown-menu>li>a{
+    background: black;
+    font-family: 'Quicksand', sans-serif;
+    color: white;
+    opacity: 1;
 }
 
 .navbar-inverse .navbar-nav>li>a{
@@ -18,6 +52,7 @@ body{
 .jumbotron{
 	background: #5E88FC;
 	color:white;
+	font-family: 'Pacifico', cursive;
 }
 
 .row {

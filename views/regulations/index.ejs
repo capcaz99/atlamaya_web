@@ -1,0 +1,26 @@
+<div class="container">
+		<div class="jumbotron">
+  			<h1>Reglamentos</h1>
+  			<p>Aqu&iacute; podr&aacute;s encontrar algunos reglamentos de la CDMX</p>
+		</div>
+	</div>	
+
+
+<!-- Estados de cuenta -->
+<div class="container">
+	<div class="row">
+	  <% regulation.forEach(function(regu){ %>
+    	   <div class="col-md-4">
+    	  	<div class="thumbnail">
+    	        <img src=" <%= regu.image %>">
+    	        <div class="caption">
+    	            <h3><%= regu.title %></h3>
+    	            <p><%= regu.content %></p>
+    	           <p><a href="<%= regu.document %>" class="btn btn-primary" role="button">Ver</a> </p>
+    	        </div>
+    	     </div>
+    	   </div>
+	   <% }); %> 
+	  
+	</div>
+</div>
