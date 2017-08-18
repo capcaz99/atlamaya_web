@@ -1,0 +1,13 @@
+<% include ../partials/header %>
+
+<form method="POST" action="/regulation">
+    <input type="text" placeholder="Nombre" name="regulation[title]">
+    <input type="text" placeholder="Foto" name="regulation[image]">
+    <input type="text" placeholder="Descripción" name="regulation[content]">
+    <input type="text" placeholder="Documento" name="regulation[document]">
+    
+    <button>Agregar</button>
+</form>
+
+
+<% include ../partials/footer %>

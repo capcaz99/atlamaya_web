@@ -1,9 +1,16 @@
+<% include ../partials/header %>
+
+
 <div class="container">
 		<div class="jumbotron">
   			<h1>Reglamentos</h1>
   			<p>Aqu&iacute; podr&aacute;s encontrar algunos reglamentos de la CDMX</p>
+  			<% if(user.admin){ %>
+				<a href="/regulation/new" class="btn btn-success">Agregar nuevo</a>
+			<% } %>  
 		</div>
 	</div>	
+
 
 
 <!-- Estados de cuenta -->
@@ -24,3 +31,5 @@
 	  
 	</div>
 </div>
+
+<% include ../partials/footer %>

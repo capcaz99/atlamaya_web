@@ -4,7 +4,7 @@ var Regulation = require("../models/regulation"),
     
     
 //===============================
-//Maintenance
+//Regulations
 //===============================
 
 //Index 

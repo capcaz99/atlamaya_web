@@ -1,5 +1,5 @@
 body{
-	
+	padding-top: 100px;
 	font-family: 'Abel', sans-serif;
 }
 
@@ -28,6 +28,11 @@ body{
     font-family: 'Quicksand', sans-serif;
     color: white;
     opacity: 1;
+    
+}
+
+.dropdown-menu{
+    padding: 0 0;
 }
 
 .navbar-inverse .navbar-nav>li>a{
