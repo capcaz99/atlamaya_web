@@ -2,12 +2,17 @@ var passportLocalMongoose = require("passport-local-mongoose"),
     methodOverride        = require("method-override"),
 	LocalStrategy         = require("passport-local"),
 	User                  = require("./models/user"),
+	serveStatic 		  = require('serve-static'),
 	bodyParser            = require("body-parser"),
 	mongoose              = require("mongoose"),
 	passport              = require("passport"),
 	express               = require("express"),
 	request               = require("request"),
 	app                   = express();
+	
+	
+
+
 
 var maintenanceRoutes = require("./routes/maintenance"),
 	regulationsRoutes = require("./routes/regulations"),
@@ -43,6 +48,7 @@ passport.deserializeUser(User.deserializeUser());
 
 //Body Parser
 app.use(bodyParser.urlencoded({extended: true}));
+app.use(serveStatic('parent-folder-of-images-folder/'));
 
 
 //Routes

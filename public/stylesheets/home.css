@@ -1,3 +1,22 @@
+#first{
+    background: url(http://info7.blob.core.windows.net.optimalcdn.com/images/2016/11/11/631525_parque-los-olivos.jpg);
+	background-size: cover;
+	background-repeat: no-repeat; 
+	height: 50vw;
+	padding-top: 0px;
+}
+
 .title{
     font-family: 'Pacifico', cursive;
+    color: white;
+    font-size: 6vw;
+    margin: auto;
+    padding-top: 20vw;
+    text-align: center;
+    
+}
+
+#news{
+    background: #BDD5EA;
+    padding-top: 6vw;
 }
