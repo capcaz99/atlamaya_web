@@ -16,14 +16,26 @@
 <!-- Estados de cuenta -->
 <div class="container">
 	<div class="row">
-	  <% regulation.forEach(function(regu){ %>
-    	   <div class="col-md-4">
+	  <% regulation.forEach(function(regulation){ %>
+    	   <div class="col-md-4 col-sm-12 butt">
     	  	<div class="thumbnail">
-    	        <img src=" <%= regu.image %>">
+    	        <img src=" <%= regulation.image %>">
     	        <div class="caption">
-    	            <h3><%= regu.title %></h3>
-    	            <p><%= regu.content %></p>
-    	           <p><a href="<%= regu.document %>" class="btn btn-primary" role="button">Ver</a> </p>
+    	            <h3><%= regulation.title %></h3>
+    	            <p><%= regulation.content %></p>
+    	           <p><a href="<%= regulation.document %>" class="btn btn-primary" role="button">Ver</a> </p>
+    	           <% if(user.admin){ %>
+        				    <div class="row">
+        				        <div class="col-md-3 col-sm-12 butt">
+            				        <input type="button" class="btn btn-info"onclick="location.href='/regulation/<%=regulation._id%>/edit';" value="Editar" />
+            				    </div>
+            				    <div class="col-md-2 col-sm-12 butt">
+            				        <form method="POST" action="/regulation/<%=regulation._id%>?_method=DELETE">
+            				            <button class="btn btn-danger">Eliminar</button>
+            				        </form>
+            				    </div>
+            				</div>
+        		  <% } %>
     	        </div>
     	     </div>
     	   </div>

@@ -1,0 +1,12 @@
+<% include ../partials/header %>
+
+
+<form method="POST" action="/regulation/<%=regulation._id%>?_method=PUT">
+    <input type="text" value="<%=regulation.title%>" name="regulation[title]">
+    <input type="text" value="<%=regulation.image%>" name="regulation[image]">
+    <input type="text" value="<%=regulation.content%>" name="regulation[content]">
+    <input type="text" value="<%=regulation.document%>" name="regulation[document]">
+    <button>Aceptar</button>
+</form>
+
+<% include ../partials/footer %>
