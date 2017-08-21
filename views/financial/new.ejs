@@ -1,0 +1,13 @@
+<% include ../partials/header %>
+
+<form method="POST" action="/financial">
+    <input type="text" placeholder="Nombre" name="financial[title]">
+    <input type="text" placeholder="Foto" name="financial[image]">
+    <input type="text" placeholder="Descripción" name="financial[description]">
+    <input type="text" placeholder="Documento" name="financial[document]">
+    
+    <button>Agregar</button>
+</form>
+
+
+<% include ../partials/footer %>

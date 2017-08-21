@@ -1,0 +1,45 @@
+<% include ../partials/header %>
+
+<!-- Jumbotron -->
+	<div class="container">
+		<div class="jumbotron">
+  			<h1>Estados financieros</h1>
+  			<p>Aqu&iacute; podr&aacute;s encontrar los estados financieros de la colonia</p>
+  			<% if(user.admin){ %>
+				<a href="/financial/new" class="btn btn-success">Agregar nuevo</a>
+			<% } %>  
+		</div>
+	</div>	
+
+
+<!-- Estados de cuenta -->
+<div class="container">
+    <div class="row">
+        <% financial.forEach(function(financial){ %>
+	    <div class="col-md-4 col-xs-12">
+	  	    <div class="thumbnail">
+	    	    <img class="thumb" src="<%=financial.image%>">
+	                <div class="caption">
+	                    <h3 class="thumb"><%= financial.title %></h3>
+	                    <p class="thumb"><%= financial.description %></p>
+	                    <p class="thumb"><a href="<%= financial.document %>" class="btn btn-primary" role="button">Ver</a> </p>
+	                </div>
+	            <% if(user.admin){ %>
+        				    <div class="row">
+        				        <div class="col-md-3 col-sm-12 butt">
+            				        <input type="button" class="btn btn-info thumb"onclick="location.href='/financial/<%=financial._id%>/edit';" value="Editar" />
+            				    </div>
+            				    <div class="col-md-2 col-sm-12 butt">
+            				        <form method="POST" action="/financial/<%=financial._id%>?_method=DELETE">
+            				            <button class="btn btn-danger thumb">Eliminar</button>
+            				        </form>
+            				    </div>
+            				</div>
+        		  <% } %>         
+	        </div>
+	    </div>
+	    <% }); %>
+	</div>
+</div>
+
+<% include ../partials/footer %>

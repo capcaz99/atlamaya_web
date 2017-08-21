@@ -1,0 +1,12 @@
+<% include ../partials/header %>
+
+
+<form method="POST" action="/financial/<%=financial._id%>?_method=PUT">
+    <input type="text" value="<%=financial.title%>" name="financial[title]">
+    <input type="text" value="<%=financial.image%>" name="financial[image]">
+    <input type="text" value="<%=financial.content%>" name="financial[content]">
+    <input type="text" value="<%=financial.document%>" name="financial[document]">
+    <button>Aceptar</button>
+</form>
+
+<% include ../partials/footer %>

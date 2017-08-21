@@ -16,6 +16,7 @@ var passportLocalMongoose = require("passport-local-mongoose"),
 
 var maintenanceRoutes = require("./routes/maintenance"),
 	regulationsRoutes = require("./routes/regulations"),
+	financialRoutes   = require("./routes/financial"),
 	securityRoutes    = require("./routes/security"),
 	adminRoutes 	  = require("./routes/admin"),
 	indexRoutes 	  = require("./routes/index"),
@@ -56,6 +57,7 @@ app.use(serveStatic('parent-folder-of-images-folder/'));
 //Routes
 app.use("/maintenance",maintenanceRoutes);
 app.use("/regulation", regulationsRoutes);
+app.use("/financial", financialRoutes);
 app.use("/security", securityRoutes);
 app.use("/table",tableRoutes);
 app.use("/news",newsRoutes);
