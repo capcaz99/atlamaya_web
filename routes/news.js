@@ -10,8 +10,9 @@ var News = require("../models/news"),
 
 //New
 router.get("/new", isLoggedIn, function(req, res) {
-	if(req.user.admin){
-		res.render("news/new");
+	var user = req.user;
+	if(user.admin){
+		res.render("news/new", {user: user});
 	}else{
 		res.redirect("/");
 	}
@@ -33,12 +34,13 @@ router.post("/", isLoggedIn, function(req, res){
 
 //Edit
 router.get("/:id/edit", isLoggedIn, function(req, res) {
-	if(req.user.admin){
+	var user = req.user;
+	if(user.admin){
 		 News.findById(req.params.id, function(err, news){
     	if(err){
     		console.log(err);
     	}else{
-    		res.render("news/edit",{news: news});
+    		res.render("news/edit",{news: news, user: user});
     	}
     });
 	}else{

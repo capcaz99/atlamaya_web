@@ -6,8 +6,9 @@ var express = require("express"),
 //===============================
 
 router.get("/administrador", isLoggedIn, function(req, res) {
-	if(req.user.admin){
-		res.render("administrador");
+    var user = req.user;
+	if(user.admin){
+		res.render("administrador", {user: user});
 	}else{
 		res.redirect("/"); //%%%%%%%%%%%%%Agregar mensaje de error
 	}

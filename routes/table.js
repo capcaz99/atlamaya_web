@@ -22,8 +22,9 @@ router.get("/", isLoggedIn, function(req, res) {
 
 //New
 router.get("/new", isLoggedIn, function(req, res) {
-	if(req.user.admin){
-		res.render("table/new");
+	var user = req.user;
+	if(user.admin){
+		res.render("table/new", {user: user});
 	}else{
 		res.redirect("/table");
 	}
@@ -43,12 +44,13 @@ router.post("/", isLoggedIn, function(req, res){
 
 //Edit
 router.get("/:id/edit", isLoggedIn, function(req, res) {
-	if(req.user.admin){
+	var user = req.user;
+	if(user.admin){
 		 Table.findById(req.params.id, function(err, table){
     	if(err){
     		console.log(err);
     	}else{
-    		res.render("table/edit",{table: table});
+    		res.render("table/edit",{table: table, user: user});
     	}
     });
 	}else{

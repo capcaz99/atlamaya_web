@@ -22,8 +22,9 @@ router.get("/", isLoggedIn, function(req, res) {
 
 //New
 router.get("/new", isLoggedIn, function(req, res) {
-	if(req.user.admin){
-		res.render("maintenance/new");
+	var user = req.user;
+	if(user.admin){
+		res.render("maintenance/new", {user, user});
 	}else{
 		res.redirect("/maintenance");
 	}
@@ -45,12 +46,13 @@ router.post("/", isLoggedIn, function(req, res){
 
 //Edit
 router.get("/:id/edit", isLoggedIn, function(req, res) {
-	if(req.user.admin){
+	var user = req.user;
+	if(user.admin){
 		 Maintenance.findById(req.params.id, function(err, maintenance){
     	if(err){
     		console.log(err);
     	}else{
-    		res.render("maintenance/edit",{maintenance: maintenance});
+    		res.render("maintenance/edit",{maintenance: maintenance, user: user});
     	}
     });
 	}else{

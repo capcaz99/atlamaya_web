@@ -23,8 +23,9 @@ router.get("/", isLoggedIn, function(req, res) {
 
 //New
 router.get("/new", isLoggedIn, function(req, res) {
-	if(req.user.admin){
-		res.render("security/new");
+	var user = req.user;
+	if(user.admin){
+		res.render("security/new",{user: user});
 	}else{
 		res.redirect("/security");
 	}
@@ -46,12 +47,13 @@ Security.create(req.body.security, function(err, security){
 
 //Edit
 router.get("/:id/edit", isLoggedIn, function(req, res) {
-	if(req.user.admin){
+	var user = req.user;
+	if(user.admin){
 		 Security.findById(req.params.id, function(err, security){
     	if(err){
     		console.log(err);
     	}else{
-    		res.render("security/edit",{security: security});
+    		res.render("security/edit",{security: security, user: user});
     	}
     });
 	}else{

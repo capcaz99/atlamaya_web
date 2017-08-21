@@ -31,8 +31,9 @@ router.get("/", isLoggedIn, function(req, res){
 
 //REGISTER
 router.get("/register", function(req, res){
-    if(req.user.admin){
-        res.render("index/register");	
+    var user = req.user;
+    if(user.admin){
+        res.render("index/register", {user: user});	
     }else{
         res.redirect("/");
     }
