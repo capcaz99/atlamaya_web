@@ -1,7 +1,8 @@
-var User    = require("../models/user.js"),
+var User     = require("../models/user.js"),
+    News     = require("../models/news.js"),
     passport = require("passport"),
-    express = require("express"),
-    router  = express.Router();
+    express  = require("express"),
+    router   = express.Router();
     
     
     
@@ -11,9 +12,16 @@ var User    = require("../models/user.js"),
 //Home
 //===============================
 
-router.get("/", function(req, res){
+router.get("/", isLoggedIn, function(req, res){
 	var user = req.user;
-    res.render("home", {user: user});
+	News.find({} , function(err, news){
+		if(err){
+			console.log(err);
+		}else{
+			res.render("home", {user: user, news: news});	
+		}
+	});	
+    
 });
 
 

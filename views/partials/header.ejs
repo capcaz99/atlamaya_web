@@ -50,6 +50,9 @@
 				        </ul>
 			        </li>
 					<li ><a class="line" href="anuncios.html"> Anuncios</a></li>
+					<% if(user.admin){  %>
+					<li><a href="/administrador">Administrador</a></li>
+					<% } %>
 					<li><a href="/logout"> Salir</a></li>
 					 
 					  

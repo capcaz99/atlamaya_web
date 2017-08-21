@@ -1,0 +1,11 @@
+<% include ../partials/header %>
+
+<form method="POST" action="/news">
+    <input type="text" placeholder="Título" name="news[title]">
+    <input type="text" placeholder="Foto" name="news[image]">
+    <input type="text" placeholder="Contenido" name="news[content]">
+    <button>Agregar</button>
+</form>
+
+
+<% include ../partials/footer %>

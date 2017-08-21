@@ -19,7 +19,9 @@ var maintenanceRoutes = require("./routes/maintenance"),
 	securityRoutes    = require("./routes/security"),
 	adminRoutes 	  = require("./routes/admin"),
 	indexRoutes 	  = require("./routes/index"),
-	tableRoutes	      = require("./routes/table");
+	tableRoutes	      = require("./routes/table"),
+	newsRoutes		  = require("./routes/news");
+
 
 //%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Falta manejo de errores
 
@@ -56,6 +58,7 @@ app.use("/maintenance",maintenanceRoutes);
 app.use("/regulation", regulationsRoutes);
 app.use("/security", securityRoutes);
 app.use("/table",tableRoutes);
+app.use("/news",newsRoutes);
 app.use(indexRoutes);
 app.use(adminRoutes);
 

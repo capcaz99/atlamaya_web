@@ -4,16 +4,46 @@
         <div class="row">
             <div class="col-xs-3"></div>
             <div class="col-xs-5">
-                
-                    <h1 class="title">Bienvenido a Atlamaya</h1>
-                    <img src="logo.png">
-               
-                
+                <h1 class="title">Bienvenido a Atlamaya</h1>
             </div>
             <div class="col-xs-4"></div>
          </div>
     </div>
 </div>
+    
+    <div class="container">
+	    <div class="row">
+            <% news.forEach(function(news){ %>
+            <div class="col-xs-2"></div>
+             <div class="thumbnail">
+                <div class="col-xs-4">
+                    <img src="<%= news.image %>" class="img-responsive img-rounded" alt="Responsive image" id="image">
+                </div>    
+                <div class="col-xs-6">
+                   
+            	    <h1><%= news.title %></h1>
+            		<h3> <%= news.content %></h3>
+            		</div>
+            				    <% if(user.admin){ %>
+                				    <div class="row">
+                				        <div class="col-md-2 col-sm-12 butt">
+                    				        <input type="button" class="btn btn-info butt"onclick="location.href='/news/<%=news._id%>/edit';" value="Editar" />
+                    				    </div>
+                    				    <div class="col-md-2 col-sm-12 butt">
+                    				        <form method="POST" action="/news/<%=news._id%>?_method=DELETE">
+                    				            <button class="btn btn-danger">Eliminar</button>
+                    				        </form>
+                    				    </div>
+                    				</div>
+                                <% } %>
+        				    </div>
+        			    	
+        		    </div>
+                </div>
+            <% }); %>
+        </div>
+    </div>
+
 
 
 <% include partials/footer %>
