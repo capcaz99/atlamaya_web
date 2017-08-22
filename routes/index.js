@@ -55,7 +55,7 @@ router.post("/register", function(req, res){
             res.render("index/register");
         }else{
             passport.authenticate("local")(req, res, function(){
-               res.render("index/home"); 
+               res.render("home"); 
             });
         }
     });

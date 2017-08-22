@@ -1,0 +1,15 @@
+<% include ../partials/header %>
+
+<form method="POST" action="/payment">
+    <select name="userid">
+        <% allUsers.forEach(function(user){ %>
+            <option value=<%= user._id %>><%= user.address %></option>
+        <% }); %>
+    </select>
+    <input type="number" placeholder="Cantidad" name="payment[quantity]">
+    <input type="text" placeholder="Descripción" name="payment[description]">
+    <button>Agregar</button>
+</form>
+
+
+<% include ../partials/footer %>

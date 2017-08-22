@@ -18,6 +18,7 @@ var maintenanceRoutes = require("./routes/maintenance"),
 	regulationsRoutes = require("./routes/regulations"),
 	financialRoutes   = require("./routes/financial"),
 	securityRoutes    = require("./routes/security"),
+	paymentRoutes     = require("./routes/payments"),
 	adminRoutes 	  = require("./routes/admin"),
 	indexRoutes 	  = require("./routes/index"),
 	tableRoutes	      = require("./routes/table"),
@@ -59,6 +60,7 @@ app.use("/maintenance",maintenanceRoutes);
 app.use("/regulation", regulationsRoutes);
 app.use("/financial", financialRoutes);
 app.use("/security", securityRoutes);
+app.use("/payment", paymentRoutes);
 app.use("/table",tableRoutes);
 app.use("/news",newsRoutes);
 app.use(indexRoutes);

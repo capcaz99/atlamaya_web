@@ -1,0 +1,50 @@
+<% include ../partials/header %>
+<div class="container">
+   <div class="thumbnail">
+       <table id="payments">
+            <tr>
+                <% if(show){ %>
+                    <th>Direcci&oacute;n</th>
+                <% } %>
+                <th>Descripci&oacute;n</th>
+                <th>Cantidad</th>
+            </tr>
+            <% if(show){ %>
+                <% allUsers.forEach(function(user){ %>
+                    <% if(user.payments.length >0 ){ %>
+                        <tr>
+                            <th><%= user.address %></th>
+                            <% user.payments.forEach(function(payment){ %>
+                                <th><%= payment.description %></th>
+                                <th>$<%= payment.quantity %></th>
+                                <form method="POST" action="/payment/<%=payment._id%>?_method=DELETE">
+                        	        <th><button class="btn">Eliminar</button></th>
+                        	    </form>
+                            <% }); %>
+                        </tr> 
+                    <% } %> 
+                <% }); %>
+                    
+                   
+                        
+               <% }else{ %>
+                   <% if(payments.length > 0){ %>
+                       <% payments.forEach(function(payment){ %>
+                            <tr>
+                            <th><%= payment.description %></th>
+                            <th><%= payment.quantity %></th>
+                            </tr>
+                        <% }); %>
+                       <% }else{ %>
+                       <!-- Aun no tienes pagos registrados -->
+                    <% } %>    
+                    
+                <% } %>
+    
+        </table>
+   </div> 
+</div>
+
+
+
+<% include ../partials/footer %>
