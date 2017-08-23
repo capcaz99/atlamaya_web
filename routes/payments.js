@@ -11,9 +11,25 @@ var Payment     = require("../models/payment"),
 //Index user
 router.get("/", isLoggedIn, function(req, res) {
 	var user = req.user;
-	var payment = req.user.payment;
 	var show = false; //Show only users payments
-	res.render("payments/index", {payment: payment, user: user, show: show});	
+	var payment =[];
+	req.user.payments.forEach(function(pay){
+		console.log(pay);
+		Payment.findById(pay, function(err, paym) {
+			if(err){
+				console.log("Payment find error"+err);
+			}else{
+				payment.push(paym);
+				
+			}
+			if(payment.length == req.user.payments.length){
+			res.render("payments/index", {payment: payment, user: user, show: show});
+		}
+		});
+		
+		
+		
+	});
 });
 
 //Index admin
@@ -24,7 +40,6 @@ router.get("/admin", isLoggedIn, function(req, res) {
 		if(err){
 			console.log(err);
 		}else{
-			
 			
 			res.render("payments/index", {allUsers: allUsers, user: user, show:show});	
 		}
@@ -69,7 +84,7 @@ router.post("/", isLoggedIn, function(req, res){
                         });
                     }
                     });
-    			res.redirect("/payment");
+    			res.redirect("/payment/admin");
     		}
     });
 });
@@ -109,11 +124,15 @@ router.put("/:id", isLoggedIn, function(req, res){
 });
 
 //Destroy
-router.delete("/:id", isLoggedIn, function(req, res){
+router.delete("/:id/:user_name", isLoggedIn, function(req, res){
 	Payment.findByIdAndRemove(req.params.id, function(err){
 		if(err){
 			console.log(err);
 		}else{
+			User.update(
+			{ username: req.params.user_name },
+			{ $pull: { 'user.payments': { $in: req.params.id } } }
+			);
 			if(req.user.admin){
 				res.redirect("/payment/admin");
 			}else{

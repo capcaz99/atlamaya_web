@@ -1,0 +1,11 @@
+<% include ../partials/header %>
+
+
+<form method="POST" action="/news/<%=news._id%>?_method=PUT">
+    <input type="text" value="<%=news.title%>" name="news[name]">
+    <input type="text" value="<%=news.content%>" name="news[conten]">
+    <input type="text" value="<%=news.image%>" name="news[image]">
+    <button>Aceptar</button>
+</form>
+
+<% include ../partials/footer %>

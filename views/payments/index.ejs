@@ -12,12 +12,12 @@
             <% if(show){ %>
                 <% allUsers.forEach(function(user){ %>
                     <% if(user.payments.length >0 ){ %>
-                        <tr>
-                            <th><%= user.address %></th>
                             <% user.payments.forEach(function(payment){ %>
+                                <tr>
+                                <th><%= user.address %></th>
                                 <th><%= payment.description %></th>
                                 <th>$<%= payment.quantity %></th>
-                                <form method="POST" action="/payment/<%=payment._id%>?_method=DELETE">
+                                <form method="POST" action="/payment/<%=payment._id%>/<%=user.username%>?_method=DELETE">
                         	        <th><button class="btn">Eliminar</button></th>
                         	    </form>
                             <% }); %>
@@ -28,8 +28,8 @@
                    
                         
                <% }else{ %>
-                   <% if(payments.length > 0){ %>
-                       <% payments.forEach(function(payment){ %>
+                   <% if(payment.length > 0){ %>
+                       <% payment.forEach(function(payment){ %>
                             <tr>
                             <th><%= payment.description %></th>
                             <th><%= payment.quantity %></th>

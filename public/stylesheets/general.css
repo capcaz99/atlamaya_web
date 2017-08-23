@@ -25,19 +25,22 @@ body{
 
 
 .navbar{
-	background: black;
+	background: #779CD1;
 	font-family: 'Quicksand', sans-serif;
-	opacity: 0.7;
+	opacity: 0.9;
 	margin-top: 15px;
+	border-color: #779CD1;
+	font-weight: 900;
 	
     
 }
 
 .dropdown-menu>li>a{
-    background: black;
+    background: #779CD1;
     font-family: 'Quicksand', sans-serif;
-    color: white;
+    color: black;
     opacity: 1;
+    font-weight: bold;
     
 }
 
@@ -46,11 +49,13 @@ body{
 }
 
 .navbar-inverse .navbar-nav>li>a{
-	color: white;
+	color: black;
+	font-weight: bold;
 }
 
 .navbar-inverse .navbar-brand{
 	color: white;
+	font-weight: bold;
 }
 
 .jumbotron{

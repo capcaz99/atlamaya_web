@@ -41,6 +41,7 @@ router.get("/register", function(req, res){
 });
 
 router.post("/register", function(req, res){
+        var currentUser = req.user;
 	  User.register(new User({
 	  						    username  : req.body.username,
 	  							address   : req.body.address,
@@ -55,7 +56,7 @@ router.post("/register", function(req, res){
             res.render("index/register");
         }else{
             passport.authenticate("local")(req, res, function(){
-               res.render("home"); 
+               res.render("home",{user: currentUser}); 
             });
         }
     });
