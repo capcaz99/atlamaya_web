@@ -7,10 +7,9 @@ body{
 	padding-top: 100px;
 }
 
-.butt{
-    padding-top: 3px;
+#inline{
+    display: inline;
 }
-
 
 /*.line{
     border-right: 1px solid white;
@@ -27,7 +26,7 @@ body{
 .navbar{
 	background: #779CD1;
 	font-family: 'Quicksand', sans-serif;
-	opacity: 0.9;
+	opacity: 0.92;
 	margin-top: 15px;
 	border-color: #779CD1;
 	font-weight: 900;

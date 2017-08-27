@@ -60,7 +60,7 @@ router.get("/new", isLoggedIn, function(req, res) {
 	        }
 	    });
 	}else{
-		res.redirect("/payment");
+		res.redirect("/payments");
 	}
     
 });
@@ -85,7 +85,7 @@ router.post("/", isLoggedIn, function(req, res){
                         });
                     }
                     });
-    			res.redirect("/payment/admin");
+    			res.redirect("/payments/admin");
     		}
     });
 });
@@ -99,58 +99,60 @@ router.post("/", isLoggedIn, function(req, res){
 router.get("/:id/edit", isLoggedIn, function(req, res) {
 	var user = req.user;
 	if(req.user.admin){
-		 Financial.findById(req.params.id, function(err, financial){
+		 Payment.findById(req.params.id, function(err, payment){
     	if(err){
     		console.log(err);
     	}else{
-    		res.render("financial/edit",{financial: financial, user: user});
+    		res.render("payments/edit",{payment: payment, user: user});
     	}
     });
 	}else{
-		res.redirect("/financial");
+		res.redirect("/payments");
 	}
    
 });
 
 //Update
 router.put("/:id", isLoggedIn, function(req, res){
-	Financial.findByIdAndUpdate(req.params.id, req.body.financial, function(err, financial){
-		if(err){
-			console.log(err);
-		}else{
-		    res.redirect("/financial");
-			
-		}
-	});
+	if(req.user.admin){
+		Payment.findByIdAndUpdate(req.params.id, req.body.payment, function(err, payment){
+			if(err){
+				console.log(err);
+			}else{
+			    res.redirect("/payments/admin");
+				
+			}
+		});	
+	}else{
+		res.redirect("/payments");
+	}
+	
 });
 
 //Destroy
 router.delete("/:id/:user_id", isLoggedIn, function(req, res){
-	Payment.findByIdAndRemove(req.params.id, function(err){
-		if(err){
+	if(req.user.admin){
+		Payment.findByIdAndRemove(req.params.id, function(err){
+			if(err){
 			console.log(err);
-		}else{
-			
-			var paymentId = new mongoose.Types.ObjectId(req.params.id);	
-			
-			User.findByIdAndUpdate(req.params.user_id,
-			{$pull:{"payments": paymentId}}, {safe: true}, function(err, data){
-				if(err){
-					console.log("ERROR AL ELIMINAR DE USUARIO" + err);
-				}else{
-					console.log("se supone que si..."+data);
-				}
-			}
-			);
-			
-			if(req.user.admin){
-				res.redirect("/payment/admin");
 			}else{
-				res.redirect("/payments");
+				var paymentId = new mongoose.Types.ObjectId(req.params.id);
+				User.findByIdAndUpdate(req.params.user_id,
+				{$pull:{"payments": paymentId}}, {safe: true}, function(err, data){
+					if(err){
+						console.log("ERROR AL ELIMINAR DE USUARIO" + err);
+					}else{
+						console.log("se supone que si..."+data);
+						res.redirect("/payments/admin");
+					}
+				});
 			}
-		}
-	});
+		});
+	}else{
+		res.redirect("/payments");
+	}
 });
+	
 
 
 

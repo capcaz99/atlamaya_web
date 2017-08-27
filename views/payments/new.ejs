@@ -1,6 +1,6 @@
 <% include ../partials/header %>
 
-<form method="POST" action="/payment">
+<form method="POST" action="/payments">
     <select name="userid">
         <% allUsers.forEach(function(user){ %>
             <option value=<%= user._id %>><%= user.address %></option>

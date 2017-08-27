@@ -17,9 +17,12 @@
                                 <th><%= otherUser.address %></th>
                                 <th><%= payment.description %></th>
                                 <th>$<%= payment.quantity %></th>
-                                <form method="POST" action="/payment/<%=payment._id%>/<%=otherUser._id%>?_method=DELETE">
-                        	        <th><button class="btn">Eliminar</button></th>
+                                <th>
+                                <input type="button" class="btn d-inline"onclick="location.href='/payments/<%=payment._id%>/edit';" value="Editar" />
+                                <form method="POST" id="inline"action="/payments/<%=payment._id%>/<%=otherUser._id%>?_method=DELETE">
+                        	        <button class="btn d-inline">Eliminar</button>
                         	    </form>
+                        	    </th>
                             <% }); %>
                         </tr> 
                     <% } %> 

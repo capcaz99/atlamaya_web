@@ -52,7 +52,7 @@ passport.deserializeUser(User.deserializeUser());
 
 //Body Parser
 app.use(bodyParser.urlencoded({extended: true}));
-app.use(serveStatic('parent-folder-of-images-folder/'));
+app.use(serveStatic('images/'));
 
 
 //Routes
@@ -60,7 +60,7 @@ app.use("/maintenance",maintenanceRoutes);
 app.use("/regulation", regulationsRoutes);
 app.use("/financial", financialRoutes);
 app.use("/security", securityRoutes);
-app.use("/payment", paymentRoutes);
+app.use("/payments", paymentRoutes);
 app.use("/table",tableRoutes);
 app.use("/news",newsRoutes);
 app.use(indexRoutes);
