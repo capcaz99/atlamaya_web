@@ -10,14 +10,14 @@
                 <th>Cantidad</th>
             </tr>
             <% if(show){ %>
-                <% allUsers.forEach(function(user){ %>
-                    <% if(user.payments.length >0 ){ %>
-                            <% user.payments.forEach(function(payment){ %>
+                <% allUsers.forEach(function(otherUser){ %>
+                    <% if(otherUser.payments.length >0 ){ %>
+                            <% otherUser.payments.forEach(function(payment){ %>
                                 <tr>
-                                <th><%= user.address %></th>
+                                <th><%= otherUser.address %></th>
                                 <th><%= payment.description %></th>
                                 <th>$<%= payment.quantity %></th>
-                                <form method="POST" action="/payment/<%=payment._id%>/<%=user.username%>?_method=DELETE">
+                                <form method="POST" action="/payment/<%=payment._id%>/<%=otherUser._id%>?_method=DELETE">
                         	        <th><button class="btn">Eliminar</button></th>
                         	    </form>
                             <% }); %>

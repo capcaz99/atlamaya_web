@@ -1,5 +1,6 @@
 var Payment     = require("../models/payment"),
-    User        =require("../models/user"),
+    User        = require("../models/user"),
+    mongoose    = require("mongoose"),
     express     = require("express"),
     router      = express.Router({mergeParams: true});
     
@@ -124,15 +125,24 @@ router.put("/:id", isLoggedIn, function(req, res){
 });
 
 //Destroy
-router.delete("/:id/:user_name", isLoggedIn, function(req, res){
+router.delete("/:id/:user_id", isLoggedIn, function(req, res){
 	Payment.findByIdAndRemove(req.params.id, function(err){
 		if(err){
 			console.log(err);
 		}else{
-			User.update(
-			{ username: req.params.user_name },
-			{ $pull: { 'user.payments': { $in: req.params.id } } }
+			
+			var paymentId = new mongoose.Types.ObjectId(req.params.id);	
+			
+			User.findByIdAndUpdate(req.params.user_id,
+			{$pull:{"payments": paymentId}}, {safe: true}, function(err, data){
+				if(err){
+					console.log("ERROR AL ELIMINAR DE USUARIO" + err);
+				}else{
+					console.log("se supone que si..."+data);
+				}
+			}
 			);
+			
 			if(req.user.admin){
 				res.redirect("/payment/admin");
 			}else{
