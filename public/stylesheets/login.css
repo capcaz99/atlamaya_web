@@ -8,7 +8,8 @@ body{
 
 .jumbotron{
     opacity: 0.9;
-   
+    background: #779CD1;
+    color: white;
 }
 
 #h1F{

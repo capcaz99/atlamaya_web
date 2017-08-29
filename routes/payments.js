@@ -14,23 +14,26 @@ router.get("/", isLoggedIn, function(req, res) {
 	var user = req.user;
 	var show = false; //Show only users payments
 	var payment =[];
-	req.user.payments.forEach(function(pay){
-		console.log(pay);
-		Payment.findById(pay, function(err, paym) {
-			if(err){
-				console.log("Payment find error"+err);
-			}else{
-				payment.push(paym);
-				
-			}
-			if(payment.length == req.user.payments.length){
+	
+	if(req.user.payments.length === 0){
+			
 			res.render("payments/index", {payment: payment, user: user, show: show});
-		}
+	}else{
+		req.user.payments.forEach(function(pay){
+			console.log(pay);
+			Payment.findById(pay, function(err, paym) {
+				if(err){
+					console.log("Payment find error"+err);
+				}else{
+					payment.push(paym);
+					
+				}
+				if(payment.length == req.user.payments.length){
+					res.render("payments/index", {payment: payment, user: user, show: show});
+				}
+			});
 		});
-		
-		
-		
-	});
+	}
 });
 
 //Index admin
@@ -137,8 +140,8 @@ router.delete("/:id/:user_id", isLoggedIn, function(req, res){
 			console.log(err);
 			}else{
 				var paymentId = new mongoose.Types.ObjectId(req.params.id);
-				User.findByIdAndUpdate(req.params.user_id,
-				{$pull:{"payments": paymentId}}, {safe: true}, function(err, data){
+				User.findByIdAndUpdate(req.params.user_id, 
+				{$pull:{"payments": paymentId}}, {safe: true},function(err, data){
 					if(err){
 						console.log("ERROR AL ELIMINAR DE USUARIO" + err);
 					}else{

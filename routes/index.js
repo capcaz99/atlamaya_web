@@ -56,7 +56,14 @@ router.post("/register", function(req, res){
             res.render("index/register");
         }else{
             passport.authenticate("local")(req, res, function(){
-               res.render("home",{user: currentUser}); 
+                News.find({}, function(err, news){
+                    if(err){
+                        console.log("News "+ err);
+                    }else{
+                        res.render("/",{user: currentUser, news: news});
+                    }
+                })
+                
             });
         }
     });
