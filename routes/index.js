@@ -24,6 +24,19 @@ router.get("/", isLoggedIn, function(req, res){
     
 });
 
+//USERS TABLE
+router.get("/users/table", isLoggedIn, function(req, res){
+    var user = req.user;
+    if(user.admin){
+        User.find({}, function(err, allUsers) {
+            if(err){
+                console.log("Error al cargas usuarios "+err)
+            }else{
+                res.render("users/table", {user: user, allUsers:allUsers});
+            }
+        })
+    }
+})
 
 //===============================
 //Authentication
@@ -60,7 +73,7 @@ router.post("/register", function(req, res){
                     if(err){
                         console.log("News "+ err);
                     }else{
-                        res.render("/",{user: currentUser, news: news});
+                        res.render("home",{user: currentUser, news: news});
                     }
                 })
                 

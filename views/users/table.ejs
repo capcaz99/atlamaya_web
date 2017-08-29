@@ -1,0 +1,40 @@
+<% include ../partials/header %>
+    <div class="container">
+       <div class="thumbnail">
+           <table id="payments">
+                <tr>
+                    
+                    <th>Nombre de usuario</th>
+                    <th>Dirección</th>
+                    <th>Tel&eacute;fono</th>
+                    <th>Referencia Bancaria</th>
+                    <th>Bloqueado</th>
+                    <th>Administrador</th>
+                    
+                </tr>
+                <% allUsers.sort(); %>
+                <% allUsers.forEach(function(otherUser){ %>
+                    <tr>
+                        <th><%=otherUser.username %></th>                
+                        <th><%=otherUser.address %></th>                
+                        <th><%=otherUser.phone %></th>                
+                        <th><%=otherUser.reference %></th>   
+                        <% if (otherUser.blocked){ %>
+                        <th>Si</th>
+                        <% }else{ %>
+                        <th>No</th>
+                        <% } %>
+                        <% if (otherUser.admin){ %>
+                        <th>Si</th>
+                        <% }else{ %>
+                        <th>No</th>
+                        <% } %> 
+                    </tr>
+                <% }); %> 
+            </table>
+       </div> 
+    </div>
+
+
+
+<% include ../partials/footer %>
