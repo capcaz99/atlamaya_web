@@ -16,11 +16,10 @@ router.get("/", isLoggedIn, function(req, res) {
 	var payment =[];
 	
 	if(req.user.payments.length === 0){
-			
-			res.render("payments/index", {payment: payment, user: user, show: show});
+		res.render("payments/index", {payment: payment, user: user, show: show});
 	}else{
 		req.user.payments.forEach(function(pay){
-			console.log(pay);
+			
 			Payment.findById(pay, function(err, paym) {
 				if(err){
 					console.log("Payment find error"+err);
@@ -35,6 +34,7 @@ router.get("/", isLoggedIn, function(req, res) {
 		});
 	}
 });
+
 
 //Index admin
 router.get("/admin", isLoggedIn, function(req, res) {

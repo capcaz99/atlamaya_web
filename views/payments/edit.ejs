@@ -2,8 +2,8 @@
 
 
 <form method="POST" action="/payments/<%=payment._id%>?_method=PUT">
+     <input type="number" value="<%=payment.quantity%>" name="payment[quantity]">
     <input type="text" value="<%=payment.description%>" name="payment[description]">
-    <input type="number" value="<%=payment.quantity%>" name="news[conten]">
     <button>Aceptar</button>
 </form>
 

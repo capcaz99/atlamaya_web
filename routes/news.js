@@ -21,15 +21,32 @@ router.get("/new", isLoggedIn, function(req, res) {
 
 //Create
 router.post("/", isLoggedIn, function(req, res){
-    
-    	News.create(req.body.news, function(err, news){
+	var user = req.user;
+	if(user.admin){
+			News.create(req.body.news, function(err, news){
     		if(err){
     			console.log(err);
     		}else{
     			res.redirect("/");
     		}
     	});
+	}else{
+		res.redirect("/");
+	}
+    
 });
+
+//Show
+router.get("/:id", isLoggedIn, function(req, res){
+	var user = req.user;
+	News.findById(req.params.id, function(err, news){
+		if(err){
+			console.log("Error en show"+ err)
+		}else{
+			res.render("news/show", {user: user, news: news})
+		}
+	})
+})
 
 
 //Edit

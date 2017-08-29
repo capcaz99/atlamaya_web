@@ -15,7 +15,7 @@
                             <% otherUser.payments.forEach(function(payment){ %>
                                 <tr>
                                 <th><%= otherUser.address %></th>
-                                <th><%= payment.description %></th>
+                                <th><%= payment.description.substring(0,60); %></th>
                                 <th>$<%= payment.quantity %></th>
                                 <th>
                                 <input type="button" class="btn d-inline"onclick="location.href='/payments/<%=payment._id%>/edit';" value="Editar" />
@@ -34,8 +34,8 @@
                    <% if(payment.length > 0){ %>
                        <% payment.forEach(function(payment){ %>
                             <tr>
-                            <th><%= payment.description %></th>
-                            <th><%= payment.quantity %></th>
+                            <th><%= payment.description.substring(0,60); %></th>
+                            <th>$<%= payment.quantity %></th>
                             </tr>
                         <% }); %>
                        <% }else{ %>
