@@ -45,8 +45,8 @@ router.get("/:id", isLoggedIn, function(req, res){
 		}else{
 			res.render("news/show", {user: user, news: news})
 		}
-	})
-})
+	});
+});
 
 
 //Edit

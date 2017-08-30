@@ -6,7 +6,7 @@ var Payment     = require("../models/payment"),
     
     
 //===============================
-//Financial 
+//Payments 
 //===============================
 
 //Index user

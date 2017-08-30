@@ -22,7 +22,8 @@ var maintenanceRoutes = require("./routes/maintenance"),
 	adminRoutes 	  = require("./routes/admin"),
 	indexRoutes 	  = require("./routes/index"),
 	tableRoutes	      = require("./routes/table"),
-	newsRoutes		  = require("./routes/news");
+	newsRoutes		  = require("./routes/news"),
+	adRoutes		  = require("./routes/ad");
 
 
 //%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Falta manejo de errores
@@ -52,7 +53,7 @@ passport.deserializeUser(User.deserializeUser());
 
 //Body Parser
 app.use(bodyParser.urlencoded({extended: true}));
-app.use(serveStatic('images/'));
+app.use(serveStatic('atlamaya_web/'));
 
 
 //Routes
@@ -63,6 +64,7 @@ app.use("/security", securityRoutes);
 app.use("/payments", paymentRoutes);
 app.use("/table",tableRoutes);
 app.use("/news",newsRoutes);
+app.use("/ad", adRoutes);
 app.use(indexRoutes);
 app.use(adminRoutes);
 
