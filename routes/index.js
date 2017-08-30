@@ -43,7 +43,7 @@ router.get("/users/table", isLoggedIn, function(req, res){
 //===============================
 
 //REGISTER
-router.get("/register", function(req, res){
+router.get("/register", isLoggedIn, function(req, res){
     var user = req.user;
     if(user.admin){
         res.render("index/register", {user: user});	

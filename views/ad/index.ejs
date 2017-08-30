@@ -1,0 +1,74 @@
+<% include ../partials/header %>
+    <div class="container thumbnail">
+        <% if(show){ %>
+        <div id="derecho">
+            <a href="/ad">Regresar a todos los anuncios</a>
+            
+        <% }else{ %>
+            <div id="derecho">
+                <a href="/ad/me">Ver mis anuncios</a>
+        <% } %>
+            <a href="/ad/new">Agregar nuevo anuncio</a>
+        </div>
+	    <div class="row">
+            <% var flag = true; %>
+            <%  ad.forEach(function(ad){
+                if(flag){ %>
+                    <div class="col-xs-1"></div>
+                    <!-- <div class="thumbnail"> -->
+                        <div class="col-xs-3">
+                            <img src="<%= ad.image %>" class="img-responsive img-rounded" alt="Responsive image" id="image">
+                        </div>    
+                        <div class="col-xs-7">
+                            <h1><a href="ad/<%=ad._id%>"><%= ad.title %></a></h1>
+            		        <h3> <%= ad.content.substring(0,100)+"..." %></h3>
+            		    
+            		    <% if(show){ %>
+                    	    <div class="row">
+                    		    <div class="col-md-2 col-sm-12 butt">
+                        		    <input type="button" class="btn btn-info butt"onclick="location.href='/ad/<%=ad._id%>/edit';" value="Editar" />
+                        		</div>
+                        		<div class="col-md-2 col-sm-12 butt">
+                            		<form method="POST" action="/ad/<%=ad._id%>?_method=DELETE">
+                            		    <button class="btn btn-danger">Eliminar</button>
+                            		</form>
+                        	    </div>
+                            </div>
+                        <% } %>
+                        </div>
+                        <div class="col-xs-1"></div>
+        			<!-- </div> -->
+        		    <% flag = !flag;
+        		    
+        	    }else{ %>
+            	    <div class="col-xs-1"></div>
+                    <!-- <div class="thumbnail"> -->
+                        <div class="col-xs-7">
+                            <h1><a href="ad/<%=ad._id%>"><%= ad.title %></a></h1>
+            		        <h3> <%= ad.content.substring(0,100)+"..." %></h3>
+            		        <% if(show){ %>
+                    	    <div class="row">
+                    		    <div class="col-md-2 col-sm-12 butt">
+                        		    <input type="button" class="btn btn-info butt"onclick="location.href='/ad/<%=ad._id%>/edit';" value="Editar" />
+                        		</div>
+                        		<div class="col-md-2 col-sm-12 butt">
+                            		<form method="POST" action="/ad/<%=ad._id%>?_method=DELETE">
+                            		    <button class="btn btn-danger">Eliminar</button>
+                            		</form>
+                        	    </div>
+                            </div>
+                        <% } %>
+                        </div>    
+                        <div class="col-xs-3">
+                            <img src="<%= ad.image %>" class="img-responsive img-rounded" alt="Responsive image" id="image">
+                        </div>
+                        <div class="col-xs-1"></div>
+        			<!-- </div> -->
+        			<% flag = !flag;
+        			
+            	  } %>
+            <% }); %>
+        </div>
+    </div>
+    
+    <% include ../partials/footer %>

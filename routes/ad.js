@@ -12,13 +12,13 @@ var Ad          = require("../models/ad"),
 //Index all 
 router.get("/", isLoggedIn, function(req, res) {
 	var user = req.user;
-	var show = true; //Show all ads.
+	var show = false; //Show all ads without buttons
 	
 	Ad.find({}, function(err, ad) {
 		if(err){
 			console.log("Ad find error"+err);
 		}else{
-		    res.render("payments/index", {ad: ad, user: user, show: show});
+		    res.render("ad/index", {ad: ad, user: user, show: show});
 		}
 	});
 });
@@ -27,28 +27,31 @@ router.get("/", isLoggedIn, function(req, res) {
 //Personal Index 
 router.get("/me", isLoggedIn, function(req, res) {
 	var user = req.user;
-	var show = false; //Show only users ads
+	var show = true; //Show buttons to edit and delete
 	var ads = [];
-	req.user.ads.forEach(function(ad){
-			
-			Ad.findById(ad, function(err, ad) {
+	if(req.user.ads.length === 0){
+		res.render("ad/index", {ad: ads, user: user, show: show});
+	}else{
+		req.user.ads.forEach(function(ad){
+		Ad.findById(ad, function(err, ad) {
 				if(err){
 					console.log("Ad find error"+err);
 				}else{
 					ads.push(ad);
 				}
-				if(ads.length == req.user.ad.length){
-					res.render("ad/index", {ad: ad, user: user, show: show});
+				if(ads.length == req.user.ads.length){
+					res.render("ad/index", {ad: ads, user: user, show: show});
 				}
 			});
 		});
+	}
     
 });
 
 //New
 router.get("/new", isLoggedIn, function(req, res) {
 	var user = req.user;
-	res.render("payments/new",{user: user});   
+	res.render("ad/new",{user: user});   
 });
 
 //Create
@@ -104,7 +107,7 @@ router.put("/:id", isLoggedIn, function(req, res){
 			if(err){
 				console.log(err);
 			}else{
-			    res.redirect("/ad/"+req.body.ad._id);
+			    res.redirect("/ad/"+ad._id);
 				
 			}
 		});	
@@ -113,13 +116,14 @@ router.put("/:id", isLoggedIn, function(req, res){
 //Destroy
 router.delete("/:id", isLoggedIn, function(req, res){
     var user = req.user;
+    
 		Ad.findByIdAndRemove(req.params.id, function(err){
 			if(err){
-			console.log(err);
+			console.log("Error al elimnar buscando ad "+ err);
 			}else{
 				var adId = new mongoose.Types.ObjectId(req.params.id);
-				User.findByIdAndUpdate(req.params.user._id, 
-				{$pull:{"ad": adId}}, {safe: true},function(err, data){
+				User.findByIdAndUpdate(req.user._id, 
+				{$pull:{"ads": adId}}, {safe: true},function(err, data){
 					if(err){
 						console.log("ERROR AL ELIMINAR DE USUARIO ad" + err);
 					}else{

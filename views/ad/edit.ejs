@@ -1,0 +1,11 @@
+<% include ../partials/header %>
+
+
+<form method="POST" action="/ad/<%=ad._id%>?_method=PUT">
+    <input type="text" value="<%=ad.title%>" name="ad[title]">
+    <input type="text" value="<%=ad.content%>" name="ad[content]">
+    <input type="text" value="<%=ad.image%>" name="ad[image]">
+    <button>Aceptar</button>
+</form>
+
+<% include ../partials/footer %>
