@@ -54,7 +54,7 @@ router.get("/register", isLoggedIn, function(req, res){
 });
 
 router.post("/register", function(req, res){
-        var currentUser = req.user;
+      var currentUser = req.user;
 	  User.register(new User({
 	  						    username  : req.body.username,
 	  							address   : req.body.address,

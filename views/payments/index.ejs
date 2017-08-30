@@ -9,12 +9,13 @@
                 <th>Descripci&oacute;n</th>
                 <th>Cantidad</th>
             </tr>
-            <% otherUser.sort(function(a, b){
-                if(a.username < b.username) return -1;
-                if(a.username > b.username) return 1;
-                return 0;
-                }); %>
+           
             <% if(show){ %>
+                 <% allUsers.sort(function(a, b){
+                    if(a.username < b.username) return -1;
+                    if(a.username > b.username) return 1;
+                    return 0;
+                    }); %>
                 <% allUsers.forEach(function(otherUser){ %>
                     <% if(otherUser.payments.length >0 ){ %>
                             <% otherUser.payments.forEach(function(payment){ %>
