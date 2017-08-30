@@ -12,7 +12,11 @@
                     <th>Administrador</th>
                     
                 </tr>
-                <% allUsers.sort(); %>
+                <% allUsers.sort(function(a, b){
+                    if(a.username < b.username) return -1;
+                    if(a.username > b.username) return 1;
+                    return 0;
+                    }); %>
                 <% allUsers.forEach(function(otherUser){ %>
                     <tr>
                         <th><%=otherUser.username %></th>                
