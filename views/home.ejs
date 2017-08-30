@@ -15,8 +15,13 @@
     
     <div class="container thumbnail">
 	    <div class="row">
-            <% var flag = true; %>
-            <%  news.forEach(function(news){
+            <% var flag = true; 
+                news.sort(function(a, b){
+                    if(a.created < b.created) return 1;
+                    if(a.created > b.created) return -1;
+                    return 0;
+                    }); 
+              news.forEach(function(news){
                 if(flag){ %>
                     <div class="col-xs-1"></div>
                     <!-- <div class="thumbnail"> -->

@@ -11,9 +11,14 @@
             <a href="/ad/new">Agregar nuevo anuncio</a>
         </div>
 	    <div class="row">
-            <% var flag = true; %>
-            <%  ad.forEach(function(ad){
-                if(flag){ %>
+            <% var flag = true;
+               ad.sort(function(a, b){
+                    if(a.created < b.created) return 1;
+                    if(a.created > b.created) return -1;
+                    return 0;
+                    });   
+               ad.forEach(function(ad){
+               if(flag){ %>
                     <div class="col-xs-1"></div>
                     <!-- <div class="thumbnail"> -->
                         <div class="col-xs-3">
