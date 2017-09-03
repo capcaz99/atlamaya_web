@@ -59,7 +59,7 @@ router.get("/new", isLoggedIn, function(req, res) {
 	        if(err){
 	            console.log(err);
 	        }else{
-	          res.render("payments/new",{user, user, allUsers: allUsers});  
+	          res.render("payments/new",{user: user, allUsers: allUsers});  
 	        }
 	    });
 	}else{
@@ -76,7 +76,7 @@ router.post("/", isLoggedIn, function(req, res){
     		}else{
     		    User.findOne({_id: req.body.userid }, function(err, user){
                     if(err){
-                        console.log("User find"+ err)
+                        console.log("User find"+ err);
                     }else{
                         user.payments.push(payment);
                         user.save(function(err, data){
