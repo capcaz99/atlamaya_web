@@ -49,6 +49,20 @@ router.post("/", isLoggedIn, function(req, res){
     
 });
 
+
+//Show
+router.get("/:id", isLoggedIn, function(req, res){
+	var user = req.user;
+	Gallery.findById(req.params.id, function(err, gallery){
+		if(err){
+			console.log("Error en show de gallery"+ err);
+		}else{
+			res.render("gallery/show", {user: user, gallery: gallery});
+		}
+	});
+});
+
+
 //Edit
 router.get("/:id/edit", isLoggedIn, function(req, res) {
 	var user = req.user;
