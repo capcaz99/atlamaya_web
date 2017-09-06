@@ -1,0 +1,1 @@
+$('.title').fadeIn(2);

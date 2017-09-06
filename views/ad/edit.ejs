@@ -1,11 +1,33 @@
+
 <% include ../partials/header %>
 
-
-<form method="POST" action="/ad/<%=ad._id%>?_method=PUT">
-    <input type="text" value="<%=ad.title%>" name="ad[title]">
-    <input type="text" value="<%=ad.content%>" name="ad[content]">
-    <input type="text" value="<%=ad.image%>" name="ad[image]">
-    <button>Aceptar</button>
-</form>
-
+    <div class="container">
+			<div class="row">	
+				<div class="col-sm-2"></div>
+				<div class="col-sm-8">
+					<div class="jumbotron">
+					  <div class="inside">
+					  	<h2 class="h1F">Edita tu anuncio</h2>
+					    <form method="POST" action="/ad/<%=ad._id%>?_method=PUT">
+					        <div class="form-group">
+					            <label>Título</label>
+					            <input type="text" class="form-control" value="<%=ad.title%>" name="ad[title]">   
+					        </div>
+					        <div class="form-group">
+					            <label>Contenido</label>
+					            <input type="text" class="form-control" value="<%=ad.content%>" name="ad[content]">
+					        </div>
+					        <div class="form-group">
+					            <label>Foto</label>
+					            <input type="text" class="form-control" value="<%=ad.image%>" name="ad[image]">
+					        </div>
+                            <button class="btn btn-primary">Aceptar</button>
+                        </form>
+					  </div>
+					</div>	
+				</div>	
+				<div class="col-sm-2"></div>
+			</div>
+	</div>
+	
 <% include ../partials/footer %>

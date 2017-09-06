@@ -53,7 +53,7 @@ router.post("/", isLoggedIn, function(req, res){
 //Show
 router.get("/:id", isLoggedIn, function(req, res){
 	var user = req.user;
-	Gallery.findById(req.params.id, function(err, gallery){
+	Gallery.findById(req.params.id).populate("photos").exec(function(err, gallery){
 		if(err){
 			console.log("Error en show de gallery"+ err);
 		}else{

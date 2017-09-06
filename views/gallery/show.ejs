@@ -1,0 +1,29 @@
+<% include ../partials/header %>
+
+	
+
+
+  <div class="container">
+		<div class="jumbotron">
+  			<h1><%= gallery.title %></h1>
+  			<% if(user.admin){ %>
+          <a class="btn btn-success" href="/photos/new/<%=gallery._id%>">Agregar foto</a>
+        <% } %>
+		</div>
+	</div>
+  
+  
+  <div class="container down">
+    <div class="row">
+      <% gallery.photos.forEach(function(photos){ %>
+        <div class="col-lg-4 col-sm-6">
+          <div class="thumbnail photos">
+            <img src="<%= photos.image %>">
+          </div>
+        </div>
+<% }) %>
+
+
+
+
+<% include ../partials/footer %>

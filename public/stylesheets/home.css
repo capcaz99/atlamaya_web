@@ -1,5 +1,12 @@
+#home{
+    padding: 0;
+}
 #first{
 	height: 50vw;
+    background: url(http://info7.blob.core.windows.net.optimalcdn.com/images/2016/11/11/631525_parque-los-olivos.jpg);
+	background-size: cover;
+	background-repeat: no-repeat; 
+	background-attachment: fixed;
 }
 
 .title{
@@ -7,15 +14,43 @@
     color: white;
     font-size: 6vw;
     margin: auto;
-    padding-top: 6vw;
     text-align: center;
+    padding-top: 120px;
     
 }
 
-.thumbnail{
-    background: black;
-    color: white;
+.butt{
+    padding-bottom: 5px;
+    padding-top: 2px;
+    
 }
 
+.buttrigth{
+    padding-right: 55px;
+}
+
+
+#news{
+    color: white;
+    text-align: justify;
+    font-family: 'Quicksand', sans-serif;
+    
+}
+
+
+.home{
+    border:0;
+}
+.home img {
+    height: 100%;
+    width: 100%;
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.separador{
+    padding-top: 5px;
+    padding-bottom: 50px;
+}
 
 

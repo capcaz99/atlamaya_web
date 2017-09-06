@@ -31,6 +31,7 @@ var maintenanceRoutes = require("./routes/maintenance"),
 //%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Falta manejo de errores
 
 app.use(express.static("public"));
+app.use(express.static("images"));
 app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");
 app.use(methodOverride("_method"));
@@ -55,7 +56,9 @@ passport.deserializeUser(User.deserializeUser());
 
 //Body Parser
 app.use(bodyParser.urlencoded({extended: true}));
-app.use(serveStatic('atlamaya_web/'));
+
+//Serve Static
+app.use(serveStatic('atlamaya_web/images'));
 
 
 //Routes

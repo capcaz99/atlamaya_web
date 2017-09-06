@@ -10,23 +10,24 @@ var Gallery     = require("../models/gallery"),
 //===============================
 
 //New
-router.get("/new", isLoggedIn, function(req, res) {
+router.get("/new/:galleryId", isLoggedIn, function(req, res) {
 	var user = req.user;
+	var galleryId = req.params.galleryId;
 	if(req.user.admin){
-	    res.render("photo/new",{user: user});  
+	    res.render("photos/new",{user: user, galleryId: galleryId});  
 	}else{
 		res.redirect("/gallery");
 	}
 });
 
 //Create
-router.post("/", isLoggedIn, function(req, res){
+router.post("/:galleryId", isLoggedIn, function(req, res){
     if(req.user.admin){
         Photos.create(req.body.photo, function(err, photo){
     		if(err){
     			console.log(err);
     		}else{
-    		    Gallery.findOne({_id: req.body.galeryId }, function(err, gallery){
+    		    Gallery.findOne({_id: req.params.galleryId }, function(err, gallery){
                     if(err){
                         console.log("Gallery find"+ err);
                     }else{

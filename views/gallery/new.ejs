@@ -1,0 +1,12 @@
+<% include ../partials/header %>
+
+<form method="POST" action="/gallery">
+    <input type="text" placeholder="Nombre" name="gallery[title]">
+    <input type="text" placeholder="Foto de portada" name="gallery[cover]">
+    <input type="hidden" value="false" name="gallery[historic]">
+    <p>Para agregar fotos a la galer&iacute;a da click en ella una vez que se haya creado.</p>
+    <button>Agregar</button>
+</form>
+
+
+<% include ../partials/footer %>

@@ -1,0 +1,9 @@
+<% include ../partials/header %>
+
+<form method="POST" action="/photos/<%= galleryId %>">
+    <input type="text" placeholder="Foto" name="photo[image]">
+    <button>Agregar</button>
+</form>
+
+
+<% include ../partials/footer %>

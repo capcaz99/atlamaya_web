@@ -1,84 +1,125 @@
-<% include partials/header %>
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Atlamaya</title>
+	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+	<link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="/stylesheets/general.css">
+	<link rel="stylesheet" type="text/css" href="/stylesheets/home.css">
+	<link rel="stylesheet" type="text/css" href="/stylesheets/payments.css">
+	<link rel="stylesheet" type="text/css" href="/stylesheets/show.css">
+	<link rel="stylesheet" type="text/css" href="/stylesheets/adIndex.css">
+	<link rel="stylesheet" type="text/css" href="/stylesheets/photos.css">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	
+</head>
+<body id="home">
+    
+<!-- Navbar -->
+	<nav class="navbar navbar-inverse navbar-fixed-top">
+		<div class="container">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navBar" aria-expanded="false">
+			        <span class="sr-only">Toggle navigation</span>
+			        <span class="icon-bar"></span>
+			        <span class="icon-bar"></span>
+			        <span class="icon-bar"></span>
+			     </button>
+			     <!-- <a href="/"  id="logo"class="navbar-brand"><img id="logo" src="logotipo.png" ></a> -->
+			     <a href="/"  id="logo"class="navbar-brand">Atlamaya</a>
+				
+			</div>
+
+			<div class="collapse navbar-collapse navbar-right" id="navBar">
+				<ul class="nav navbar-nav">
+					<li class="line"><a href="/financial"> Estados Financieros</a></li>
+					<li class="dropdown line">
+          				<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> Directorio <span class="caret"></span></a>
+			          	<ul class="dropdown-menu">
+				            <li><a href="/table">Mesa Directiva</a></li>
+				            <li><a href="/security">Seguridad</a></li>
+				            <li><a href="/maintenance">Mantenimiento</a></li>
+				        </ul>
+			        </li>
+
+					<li class="line"><a href="/payments"> Pagos de Mantenimiento</a></li>
+					<li class="line"><a href="/regulation"> Reglamentos CDMX</a></li>
+					<li class="dropdown line">
+          				<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> Multimedia <span class="caret"></span></a>
+			          	<ul class="dropdown-menu">
+				            <li><a href="/gallery">Fotos </a></li>
+				            <li><a href="dirSeguridad.html">Archivo Hist&oacute;rico</a></li>
+				            
+				        </ul>
+			        </li>
+					<li ><a class="line" href="/ad"> Anuncios</a></li>
+					<% if(user.admin){  %>
+					<li><a href="/administrador">Administrador</a></li>
+					<% } %>
+					<li><a href="/logout"> Salir</a></li>
+					 
+					  
+				</ul>
+				
+			</div>
+		</div>
+	</nav>
+	
 <div id="first">
     <div class="container">
         <div class="row">
             <div class="col-xs-4"></div>
             <div class="col-xs-4">
                 <h1 class="title">Bienvenido a Atlamaya</h1>
+                
             </div>
             <div class="col-xs-4">
-                <img src="images/logo.png">
+               
             </div>
          </div>
     </div>
 </div>
     
-    <div class="container thumbnail">
-	    <div class="row">
-            <% var flag = true; 
-                news.sort(function(a, b){
-                    if(a.created < b.created) return 1;
-                    if(a.created > b.created) return -1;
-                    return 0;
-                    }); 
-              news.forEach(function(news){
-                if(flag){ %>
-                    <div class="col-xs-1"></div>
-                    <!-- <div class="thumbnail"> -->
-                        <div class="col-xs-3">
-                            <img src="<%= news.image %>" class="img-responsive img-rounded" alt="Responsive image" id="image">
-                        </div>    
-                        <div class="col-xs-7">
-                            <h1><a href="news/<%=news._id%>"><%= news.title %></a></h1>
-            		        <h3> <%= news.content.substring(0,100)+"..." %></h3>
-            		    
-            		    <% if(user.admin){ %>
-                    	    <div class="row">
-                    		    <div class="col-md-2 col-sm-12 butt">
-                        		    <input type="button" class="btn btn-info butt"onclick="location.href='/news/<%=news._id%>/edit';" value="Editar" />
-                        		</div>
-                        		<div class="col-md-2 col-sm-12 butt">
-                            		<form method="POST" action="/news/<%=news._id%>?_method=DELETE">
-                            		    <button class="btn btn-danger">Eliminar</button>
-                            		</form>
-                        	    </div>
-                            </div>
-                        <% } %>
-                        </div>
-                        <div class="col-xs-1"></div>
-        			<!-- </div> -->
-        		    <% flag = !flag;
-        		    
-        	    }else{ %>
-            	    <div class="col-xs-1"></div>
-                    <!-- <div class="thumbnail"> -->
-                        <div class="col-xs-7">
-                            <h1><a href="news/<%=news._id%>"><%= news.title %></a></h1>
-            		        <h3> <%= news.content.substring(0,100)+"..." %></h3>
-            		        <% if(user.admin){ %>
-                    	    <div class="row">
-                    		    <div class="col-md-2 col-sm-12 butt">
-                        		    <input type="button" class="btn btn-info butt"onclick="location.href='/news/<%=news._id%>/edit';" value="Editar" />
-                        		</div>
-                        		<div class="col-md-2 col-sm-12 butt">
-                            		<form method="POST" action="/news/<%=news._id%>?_method=DELETE">
-                            		    <button class="btn btn-danger">Eliminar</button>
-                            		</form>
-                        	    </div>
-                            </div>
-                        <% } %>
-                        </div>    
-                        <div class="col-xs-3">
-                            <img src="<%= news.image %>" class="img-responsive img-rounded" alt="Responsive image" id="image">
-                        </div>
-                        <div class="col-xs-1"></div>
-        			<!-- </div> -->
-        			<% flag = !flag;
-        			
-            	  } %>
-            <% }); %>
+<div id="news">
+	<h1 style="text-align:center">Noticias Recientes</h1>
+	<div class="row">
+	    <%news.sort(function(a, b){
+	                    if(a.created < b.created) return 1;
+	                    if(a.created > b.created) return -1;
+	                    return 0;
+	                    }); 
+	    news.forEach(function(news){ %>
+	    <div class="container separador">
+		    
+		        <div class="col-md-4 col-xs-12">
+		        	<div class="thumbnail home">
+		            	<img src="<%= news.image %>" class="img-responsive img-rounded" alt="Responsive image" id="image">
+					</div>                        
+		        </div>    
+		        <div class="col-md-7 col-xs-12">
+		            <h1><a style="color:#387F21"href="news/<%=news._id%>"><%= news.title %></a></h1>
+		            <h3> <%= news.content.substring(0,100)+"[...]" %></h3>
+		            <% if(user.admin){ %>
+		                <div class="row">
+		                    <div class="col-md-1 col-xs-12 buttrigth">
+		                        <input type="button" class="btn btn-info "onclick="location.href='/news/<%=news._id%>/edit';" value="Editar" />
+		                    </div>
+		                    <div class="col-md-1 col-sm-12 butt">
+		                        <form method="POST" action="/news/<%=news._id%>?_method=DELETE">
+		                        	<button class="btn btn-danger">Eliminar</button>
+		                        </form>
+		                    </div>
+		                </div>
+		            <% } %>
+		        </div>
+	        	<div class="col-md-1"></div>
+	        
         </div>
+    	<% }); %>
     </div>
+</div>
            
                 
                 
