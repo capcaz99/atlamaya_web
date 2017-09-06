@@ -5,7 +5,7 @@
 	background-attachment: fixed;
 	font-family: 'Abel', sans-serif;
 	padding-top: 100px;
-}*/
+}}*/
 
 body{
     background: #1c3b6d;
@@ -14,9 +14,10 @@ body{
 
 #inline{
     display: inline;
-}
 
-/*.line{
+}
+/*
+.line{
     border-right: 1px solid white;
      position: absolute;
      top: 50%;
@@ -75,9 +76,13 @@ body{
 .jumbotron{
     padding-top: 25px;
 	background: #779CD1;
-	color:white;
-	font-family: 'Pacifico', cursive;
+	color:white;    
+	font-family: 'Quicksand', sans-serif;
+
 }
+/*
+	font-family: 'Pacifico', cursive;
+*/
 
 .row {
     display: table;

@@ -1,13 +1,26 @@
 <% include ../partials/header %>
 
+<!-- Jumbotron -->
+	<div class="container">
+		<div class="jumbotron">
+  			<h1>Galer&iacute;as</h1>
+  			<p>Aqu&iacute; podr&aacute;s encontrar las galer&iacute;as</p>
+  			<% if(user.admin){ %>
+				<a href="/gallery/new" class="btn btn-success">Agregar nuevo</a>
+			<% } %>  
+		</div>
+	</div>	
+
 
     <div class="container">
     <div class="row">
     <% gallery.forEach(function(gallery){ %>
         <div class="col-lg-4 col-sm-6">
-            <div class="thumbnail photos">
-                <img src="<%= gallery.cover%>">
-                <h3><a href="gallery/<%=gallery._id%>"><%= gallery.title %></a></h3>
+            <div class="gallery">
+                <div class="thumbnail photos">
+                   <a href="/gallery/<%=gallery._id%>"> <img src="<%= gallery.cover%>"></a>
+                </div>
+               <a href="/gallery/<%=gallery._id%>"><h3><%=gallery.title%></h3></a>
             </div>
         </div>
     <% }); %>
