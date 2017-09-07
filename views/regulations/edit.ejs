@@ -1,12 +1,38 @@
+
 <% include ../partials/header %>
 
-
-<form method="POST" action="/regulation/<%=regulation._id%>?_method=PUT">
-    <input type="text" value="<%=regulation.title%>" name="regulation[title]">
-    <input type="text" value="<%=regulation.image%>" name="regulation[image]">
-    <input type="text" value="<%=regulation.content%>" name="regulation[content]">
-    <input type="text" value="<%=regulation.document%>" name="regulation[document]">
-    <button>Aceptar</button>
-</form>
-
+    <div class="container">
+			<div class="row">	
+				<div class="col-sm-2"></div>
+				<div class="col-sm-8">
+					<div class="jumbotron">
+					  <div class="inside">
+					  	<h2 class="h1F">Editar regulaci&oacute;n</h2>
+                            <form method="POST" action="/regulation/<%=regulation._id%>?_method=PUT">					       
+                            <div class="form-group">
+					            <label>Nombre</label>
+					            <input type="text" class="form-control" value="<%=regulation.title%>" name="regulation[title]">   
+					        </div>
+					        <div class="form-group">
+					            <label>Imagen</label>
+					            <input type="text" class="form-control" value="<%=regulation.image%>" name="regulation[image]">
+					        </div>
+					        <div class="form-group">
+					            <label>Contenido</label>
+					            <input type="text" class="form-control" value="<%=regulation.content%>" name="regulation[content]">
+					        </div>
+					        <div class="form-group">
+					            <label>Documento</label>
+					             <input type="text" class="form-control" value="<%=regulation.document%>" name="regulation[document]">
+					        </div>
+                            <button class="btn btn-primary">Aceptar</button>
+                        </form>
+					  </div>
+					</div>	
+				</div>	
+				<div class="col-sm-2"></div>
+			</div>
+	</div>
+	
 <% include ../partials/footer %>
+

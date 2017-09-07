@@ -1,12 +1,34 @@
+
 <% include ../partials/header %>
 
-<form method="POST" action="/maintenance">
-    <input type="text" placeholder="Nombre" name="maintenance[name]">
-    <input type="text" placeholder="Foto" name="maintenance[image]">
-    <input type="text" placeholder="Trabajo" name="maintenance[job]">
-    
-    <button>Agregar</button>
-</form>
-
-
+    <div class="container">
+			<div class="row">	
+				<div class="col-sm-2"></div>
+				<div class="col-sm-8">
+					<div class="jumbotron">
+					  <div class="inside">
+					  	<h2 class="h1F">Agregar un elemento de mantenimiento</h2>
+                            <form method="POST" action="/maintenance">					       
+                            <div class="form-group">
+					            <label>Nombre</label>
+					            <input type="text" class="form-control" placeholder="Nombre" name="maintenance[name]">  
+					        </div>
+					        <div class="form-group">
+					            <label>Imagen</label>
+					            <input type="text" class="form-control" placeholder="Imagen" name="maintenance[image]">
+					        </div>
+					        <div class="form-group">
+					            <label>Trabajo</label>
+					            <input type="text" class="form-control" placeholder="Trabajo" name="maintenance[job]">
+					        </div>
+					       
+                            <button class="btn btn-primary">Aceptar</button>
+                        </form>
+					  </div>
+					</div>	
+				</div>	
+				<div class="col-sm-2"></div>
+			</div>
+	</div>
+	
 <% include ../partials/footer %>

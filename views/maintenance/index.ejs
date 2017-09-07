@@ -10,7 +10,7 @@
 		<h3>Aqu&iacute; podr&aacute;s encontrar los datos de la gente de mantenimiento del condominio</h3>
 		<% if(user.admin){ %>
 		<div class="row">
-		    <a href="/regulation/new" class="btn btn-success">Agregar nuevo</a>
+		    <a href="/maintenance/new" class="btn btn-success">Agregar nuevo</a>
 		</div>
         <% } %>
 	</div>
@@ -30,10 +30,10 @@
         				   <h3> <%= maintenance.job %></h3>
         				    <% if(user.admin){ %>
         				    <div class="row">
-        				        <div class="col-md-2 col-sm-12 butt">
+        				        <div class="col-md-1 col-sm-12 buttrigth">
             				        <input type="button" class="btn btn-info butt"onclick="location.href='/maintenance/<%=maintenance._id%>/edit';" value="Editar" />
             				    </div>
-            				    <div class="col-md-2 col-sm-12 butt">
+            				    <div class="col-md-1 col-sm-12 butt">
             				        <form method="POST" action="/maintenance/<%=maintenance._id%>?_method=DELETE">
             				            <button class="btn btn-danger">Eliminar</button>
             				        </form>

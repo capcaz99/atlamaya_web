@@ -1,11 +1,35 @@
+
+
 <% include ../partials/header %>
 
-
-<form method="POST" action="/table/<%=table._id%>?_method=PUT">
-    <input type="text" value="<%=table.name%>" name="table[name]">
-    <input type="text" value="<%=table.job%>" name="table[job]">
-    <input type="text" value="<%=table.image%>" name="table[image]">
-    <button>Aceptar</button>
-</form>
-
+    <div class="container">
+			<div class="row">	
+				<div class="col-sm-2"></div>
+				<div class="col-sm-8">
+					<div class="jumbotron">
+					  <div class="inside">
+					  	<h2 class="h1F">Agregar un elemento de la mesa directiva</h2>
+                            <form method="POST" action="/table/<%=table._id%>?_method=PUT">					       
+                            <div class="form-group">
+					            <label>Nombre</label>
+					            <input type="text" class="form-control" value="<%=table.name%>" name="table[name]">   
+					        </div>
+					        <div class="form-group">
+					            <label>Imagen</label>
+					            <input type="text" class="form-control" value="<%=table.image%>" name="table[image]">
+					        </div>
+					        <div class="form-group">
+					            <label>Trabajo</label>
+					            <input type="text" class="form-control" value="<%=table.job%>" name="table[job]">
+					        </div>
+					      <button class="btn btn-primary">Aceptar</button>
+                        </form>
+					  </div>
+					</div>	
+				</div>	
+				<div class="col-sm-2"></div>
+			</div>
+	</div>
+	
 <% include ../partials/footer %>
+

@@ -1,9 +1,25 @@
+
 <% include ../partials/header %>
 
-<form method="POST" action="/photos/<%= galleryId %>">
-    <input type="text" placeholder="Foto" name="photo[image]">
-    <button>Agregar</button>
-</form>
-
-
+    <div class="container">
+			<div class="row">	
+				<div class="col-sm-2"></div>
+				<div class="col-sm-8">
+					<div class="jumbotron">
+					  <div class="inside">
+					  	<h2 class="h1F">Agregar una foto</h2>
+                            <form method="POST" action="/photos/<%= galleryId %>">					       
+                            <div class="form-group">
+					            <label>Imagen</label>
+					            <input class="form-control" type="text" placeholder="Foto" name="photo[image]">   
+					        </div>
+                            <button class="btn btn-primary">Aceptar</button>
+                        </form>
+					  </div>
+					</div>	
+				</div>	
+				<div class="col-sm-2"></div>
+			</div>
+	</div>
+	
 <% include ../partials/footer %>

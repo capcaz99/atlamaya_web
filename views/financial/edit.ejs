@@ -1,12 +1,38 @@
+
 <% include ../partials/header %>
 
-
-<form method="POST" action="/financial/<%=financial._id%>?_method=PUT">
-    <input type="text" value="<%=financial.title%>" name="financial[title]">
-    <input type="text" value="<%=financial.image%>" name="financial[image]">
-    <input type="text" value="<%=financial.content%>" name="financial[content]">
-    <input type="text" value="<%=financial.document%>" name="financial[document]">
-    <button>Aceptar</button>
-</form>
-
+    <div class="container">
+			<div class="row">	
+				<div class="col-sm-2"></div>
+				<div class="col-sm-8">
+					<div class="jumbotron">
+					  <div class="inside">
+					  	<h2 class="h1F">Editar el estado financiero</h2>
+                            <form method="POST" action="/financial/<%=financial._id%>?_method=PUT">					       
+                            <div class="form-group">
+					            <label>Título</label>
+					            <input type="text" class="form-control" value="<%=financial.title%>" name="financial[title]">   
+					        </div>
+					        <div class="form-group">
+					            <label>Imagen</label>
+					            <input type="text" class="form-control" value="<%=financial.image%>" name="financial[image]">
+					        </div>
+					        <div class="form-group">
+					            <label>Contenido</label>
+					            <input type="text" class="form-control" value="<%=financial.content%>" name="financial[content]">
+					        </div>
+					        <div class="form-group">
+					            <label>Documento</label>
+					            <input type="text" class="form-control" value="<%=financial.document%>" name="financial[document]">
+					        </div>
+					        
+                            <button class="btn btn-primary">Aceptar</button>
+                        </form>
+					  </div>
+					</div>	
+				</div>	
+				<div class="col-sm-2"></div>
+			</div>
+	</div>
+	
 <% include ../partials/footer %>

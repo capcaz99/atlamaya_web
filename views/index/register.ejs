@@ -1,22 +1,54 @@
-<h1>Register Form</h1>
+<% include ../partials/header %>
 
-<form method="POST" action="/register">
-    <input type="text" placeholder="Nombre de Usuario" name="username">
-    <input type="password" placeholder="Contrase&ntilde;a" name="password">
-    <input type="text" placeholder="Direcci&oacute;n" name="address">
-    <input type="number" placeholder="Tel&eacute;fono" name="phone">
-    <input type="text" placeholder="Referencia" name="reference">
-    <span>Bloqueado</span>
-    <select name="blocked"> 
-        <option value="true">Si</option>
-        <option value="false">No</option>
-    
-    </select>
-    <span>Administrador</span>
-    <select name="admin" placeholder="Administrador"> 
-        <option value="true">Si</option>
-        <option value="false">No</option>
-    
-    </select>
-    <button>Añadir</button>
-</form>
+    <div class="container">
+			<div class="row">	
+				<div class="col-sm-2"></div>
+				<div class="col-sm-8">
+					<div class="jumbotron">
+					  <div class="inside">
+					  	<h2 class="h1F">Agregar un usuario</h2>
+					  	    <form method="POST" action="/register">
+                                <div class="form-group">
+                                    <label>Nombre de usuario</label>
+                                    <input type="text" class="form-control" placeholder="tlapacoya10" name="username">
+                                </div>
+                                <div class="form-group">
+                                    <label>Contrase&ntilde;a</label>    
+                                    <input type="password" class="form-control" placeholder="1231223" name="password">
+                                </div>
+                                <div class="form-group">
+                                    <label>Direcci&oacute;n</label>
+                                    <input type="text" class="form-control" placeholder="Tlapacoya 10" name="address">
+                                </div>
+                                <div class="form-group">
+                                    <label>Tel&eacute;fono</label>
+                                    <input type="number" class="form-control" placeholder="56662349" name="phone">
+                                </div>
+                                <div class="form-group">
+                                    <label>Referencia</label>
+                                    <input type="text" class="form-control" placeholder="Referencia" name="reference">
+                                </div>
+                                <div class="form-group">
+                                    <label>Bloqueado</label>
+                                    <select name="blocked" class="form-control"> 
+                                        <option value="false">No</option>
+                                        <option value="true">Si</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Administrador</label>
+                                    <select name="admin" placeholder="Administrador" class="form-control"> 
+                                        <option value="false">No</option>
+                                        <option value="true">Si</option>
+                                    </select>
+                                </div>
+                                <button class="btn btn-primary">Añadir</button>
+                            </form>
+					  </div>
+					</div>	
+				</div>	
+				<div class="col-sm-2"></div>
+			</div>
+	</div>
+	
+<% include ../partials/footer %>

@@ -1,13 +1,29 @@
-<h1>Administrador</h1>
+<% include partials/header %>
+	<div class="container">
+		<div class="jumbotron">
+  			<h1>Panel de administrador</h1>
+		</div>
+	</div>
 
-<a href="/news/new">Agregar noticia</a>
-<a href="/register">Agregar Usuario</a>
-<a href="/users/table">Tabla de usuarios</a>
-<a href="/payments/admin">Todos los pagos</a>
-<a href="/payments/new">Agregar Pago</a>
-<a href="/table">Mesa directiva</a>
-<a href="/maintenance">Mantenimineto</a>
-<a href="/regulations">Reglamentos</a>
-<a href="/financial">Estados financieros</a>
-<a href="/gallery">Galeria</a>
-<a href="/">Archivo Histórico</a>
+<div class="container">
+    <div class="col-lg-4"></div>
+    <div class="col-lg-4">
+        <br>
+        <h4><a href="/news/new">Agregar noticia</a></h4>
+        <br>
+         <h4><a href="/register">Agregar Usuario</a></h4>
+        <br>
+         <h4><a href="/users/table">Tabla de usuarios</a></h4>
+        <br>
+         <h4><a href="/payments/admin">Todos los pagos</a></h4>
+        <br>
+         <h4><a href="/payments/new">Agregar Pago</a></h4>
+        
+    </div>
+    <div class="col-lg-4"></div>
+
+
+
+</div>
+
+<% include partials/footer %>

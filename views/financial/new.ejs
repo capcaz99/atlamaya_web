@@ -1,13 +1,38 @@
+
 <% include ../partials/header %>
 
-<form method="POST" action="/financial">
-    <input type="text" placeholder="Nombre" name="financial[title]">
-    <input type="text" placeholder="Foto" name="financial[image]">
-    <input type="text" placeholder="Descripción" name="financial[description]">
-    <input type="text" placeholder="Documento" name="financial[document]">
-    
-    <button>Agregar</button>
-</form>
-
-
+    <div class="container">
+			<div class="row">	
+				<div class="col-sm-2"></div>
+				<div class="col-sm-8">
+					<div class="jumbotron">
+					  <div class="inside">
+					  	<h2 class="h1F">Agregar un nuevo estado financiero</h2>
+                            <form method="POST" action="/financial">					       
+                            <div class="form-group">
+					            <label>Título</label>
+					            <input type="text" class="form-control" placeholder="Nombre" name="financial[title]">   
+					        </div>
+					        <div class="form-group">
+					            <label>Imagen</label>
+					            <input type="text" class="form-control" placeholder="Imagen" name="financial[image]">
+					        </div>
+					        <div class="form-group">
+					            <label>Contenido</label>
+					            <input type="text" class="form-control" placeholder="Descripción" name="financial[content]">
+					        </div>
+					        <div class="form-group">
+					            <label>Documento</label>
+					            <input type="text" class="form-control" placeholder="Documento" name="financial[document]">
+					        </div>
+					        
+                            <button class="btn btn-primary">Aceptar</button>
+                        </form>
+					  </div>
+					</div>	
+				</div>	
+				<div class="col-sm-2"></div>
+			</div>
+	</div>
+	
 <% include ../partials/footer %>

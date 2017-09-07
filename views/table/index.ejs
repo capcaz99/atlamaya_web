@@ -19,7 +19,7 @@
 <div class="container">
 	<div class="row">
         <% table.forEach(function(table){ %>
-            <div class="col-xs-6">
+            <div class="col-md-6 col-sm-12">
         	    <div class="thumbnail">
         		    <div class="row">
         			    <div class="col-xs-4">
@@ -30,10 +30,10 @@
         				    <h3><%= table.job %></h3>
         				    <% if(user.admin){ %>
         				    <div class="row">
-        				        <div class="col-xs-2">
+        				        <div class="col-md-2 col-sm-12 buttrigth">
             				        <input type="button" class="btn btn-info"onclick="location.href='/table/<%=table._id%>/edit';" value="Editar" />
             				    </div>
-            				    <div class="col-xs-2">
+            				    <div class="col-md-2 col-sm-12 butt">
             				        <form method="POST" action="/table/<%=table._id%>?_method=DELETE">
             				            <button class="btn btn-danger">Eliminar</button>
             				        </form>
