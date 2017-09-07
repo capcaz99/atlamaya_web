@@ -5,6 +5,7 @@ var adSchema = mongoose.Schema({
     content: String, 
     title: String,
     image: String,
+    creator: String
     
 });
 

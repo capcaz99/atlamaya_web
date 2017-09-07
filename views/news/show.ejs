@@ -1,9 +1,17 @@
 <% include ../partials/header %>
-<div class="container">
-    <div class="thumbnail">
+<div class="container ">
+    <div class="thumbnail letras">
+        <h4><a href="/">Regresar a noticias</a></h4>
         <h1 id="title"><%= news.title %></h1>
-        <img src="<%= news.image %>">
-        <p><%= news.content %></p>
+        <div class="row">
+            <div class="col-xs-3"></div>
+            <div class="col-xs-6 home"> 
+                <img src="<%= news.image %>">
+            </div>
+            <div class="col-xs-3"></div>
+        </div>
+        <p class="contenido"><%= news.content %></p>
+        
     </div>
     
     

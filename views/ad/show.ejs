@@ -1,10 +1,18 @@
 <% include ../partials/header %>
-<div class="container">
-    <div class="thumbnail">
-        <a href="/ad">Regresar a anuncios</a>
+<div class="container ">
+    <div class="thumbnail letras">
+        <h4><a href="/ad">Regresar a anuncios</a></h4>
         <h1 id="title"><%= ad.title %></h1>
-        <img src="<%= ad.image %>">
-        <p><%= ad.content %></p>
+        <h2>Publicado por: <%= ad.creator %></h2>
+        <div class="row">
+            <div class="col-xs-3"></div>
+            <div class="col-xs-6 home"> 
+                <img src="<%= ad.image %>">
+            </div>
+            <div class="col-xs-3"></div>
+        </div>
+        <p class="contenido"><%= ad.content %></p>
+        
     </div>
     
     

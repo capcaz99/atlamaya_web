@@ -16,11 +16,18 @@
 	</div>
 </div>
 
-<div class="container">
+<div class="container ">
 	<div class="row">
-        <% maintenance.forEach(function(maintenance){ %>
-            <div class="col-md-6 col-sm-12">
-        	    <div class="thumbnail">
+        <% maintenance.sort(function(a, b){
+                    if(a.name < b.name) return -1;
+                    if(a.name > b.name) return 1;
+                    return 0;
+                    }); 
+        
+        
+        maintenance.forEach(function(maintenance){ %>
+            <div class="col-md-6 col-sm-12 separador">
+        	    <div class="thumbnail ">
         		    <div class="row">
         			    <div class="col-xs-4">
         			        <img src="<%= maintenance.image %>" class="img-responsive img-rounded" alt="Responsive image" id="image">

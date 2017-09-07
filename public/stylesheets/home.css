@@ -18,10 +18,17 @@
     padding-top: 120px;
     
 }
-
-.butt{
+@media (max-width: 1200px) {
+    .butt{
     padding-bottom: 5px;
     padding-top: 2px;
+    
+}
+    
+}   
+.butt{
+    padding-bottom: 5px;
+    
     
 }
 
@@ -30,7 +37,7 @@
 }
 
 
-#news{
+.news{
     color: white;
     text-align: justify;
     font-family: 'Quicksand', sans-serif;

@@ -15,8 +15,15 @@
 <!-- Estados de cuenta -->
 <div class="container">
     <div class="row">
-        <% financial.forEach(function(financial){ %>
-	    <div class="col-md-4 col-xs-12">
+        <% 
+        	financial.sort(function(a, b){
+                    if(a.created < b.created) return 1;
+                    if(a.created > b.created) return -1;
+                    return 0;
+                    }); 
+        
+        financial.forEach(function(financial){ %>
+	    <div class="col-md-4 col-xs-12 separador">
 	  	    <div class="thumbnail">
 	    	    <img class="thumb" src="<%=financial.image%>">
 	                <div class="caption">
@@ -26,10 +33,10 @@
 	                </div>
 	            <% if(user.admin){ %>
         				    <div class="row">
-        				        <div class="col-md-3 col-sm-12 butt">
+        				        <div class="col-md-1 col-sm-12 buttrigth">
             				        <input type="button" class="btn btn-info thumb"onclick="location.href='/financial/<%=financial._id%>/edit';" value="Editar" />
             				    </div>
-            				    <div class="col-md-2 col-sm-12 butt">
+            				    <div class="col-md-1 col-sm-12 butt">
             				        <form method="POST" action="/financial/<%=financial._id%>?_method=DELETE">
             				            <button class="btn btn-danger thumb">Eliminar</button>
             				        </form>

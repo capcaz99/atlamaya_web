@@ -1,8 +1,16 @@
 <% include ../partials/header %>
+	<div class="container">
+		<div class="jumbotron">
+  			<h1>Tabla de pagos</h1>
+  			<% if(user.admin){ %>
+				<a href="/payments/new" class="btn btn-success">Agregar nuevo</a>
+			<% } %>  
+		</div>
+	</div>	
 <div class="container">
    <div class="thumbnail">
        <table id="payments">
-            <tr>
+            <tr class="tablaPrimero">
                 <% if(show){ %>
                     <th>Direcci&oacute;n</th>
                 <% } %>
@@ -17,16 +25,22 @@
                     return 0;
                     }); %>
                 <% allUsers.forEach(function(otherUser){ %>
-                    <% if(otherUser.payments.length >0 ){ %>
-                            <% otherUser.payments.forEach(function(payment){ %>
+                    <% if(otherUser.payments.length >0 ){ 
+                        
+                                        otherUser.payments.sort(function(a, b){
+                                    if(a.created < b.created) return 1;
+                                    if(a.created > b.created) return -1;
+                                    return 0;
+                                    }); 
+                            otherUser.payments.forEach(function(payment){ %>
                                 <tr>
                                 <th><%= otherUser.address %></th>
                                 <th><%= payment.description.substring(0,60); %></th>
                                 <th>$<%= payment.quantity %></th>
                                 <th>
-                                <input type="button" class="btn d-inline"onclick="location.href='/payments/<%=payment._id%>/edit';" value="Editar" />
+                                <input type="button" class="btn d-inline btn-info"onclick="location.href='/payments/<%=payment._id%>/edit';" value="Editar" />
                                 <form method="POST" id="inline"action="/payments/<%=payment._id%>/<%=otherUser._id%>?_method=DELETE">
-                        	        <button class="btn d-inline">Eliminar</button>
+                        	        <button class="btn d-inline btn-danger">Eliminar</button>
                         	    </form>
                         	    </th>
                             <% }); %>

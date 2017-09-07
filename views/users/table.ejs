@@ -1,8 +1,18 @@
 <% include ../partials/header %>
+	<div class="container">
+		<div class="jumbotron">
+  			<h1>Tabla de usuarios</h1>
+  			
+  			<% if(user.admin){ %>
+				<a href="/register" class="btn btn-success">Agregar nuevo</a>
+			<% } %>  
+		</div>
+	</div>	
+	
     <div class="container">
        <div class="thumbnail">
            <table id="payments">
-                <tr>
+                <tr class="tablaPrimero">
                     
                     <th>Nombre de usuario</th>
                     <th>Dirección</th>

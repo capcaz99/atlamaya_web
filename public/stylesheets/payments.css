@@ -1,5 +1,5 @@
 #payments{
-    border: 2px solid black;
+  
     border-collapse: collapse;
     color: white;
     width: 100%;
@@ -11,4 +11,8 @@ th{
 
 .black{
     color: black;
+}
+
+.tablaPrimero{
+    border-bottom: 2px solid white;
 }

@@ -1,15 +1,24 @@
 <% include ../partials/header %>
-    <div class="container thumbnail">
+    <div class="container ">
         <% if(show){ %>
         <div id="derecho">
-            <a href="/ad">Regresar a todos los anuncios</a>
-            
+            <div class="row">
+            <div class="col-xs-3">
+            <h4><a href="/ad">Regresar a todos los anuncios</a></h4>
+            </div>
         <% }else{ %>
             <div id="derecho">
-                <a href="/ad/me">Ver mis anuncios</a>
+                <div class="col-xs-2">
+                <h4><a href="/ad/me">Ver mis anuncios</a></h4>
+                </div>
         <% } %>
-            <a href="/ad/new">Agregar nuevo anuncio</a>
+        <div class="col-xs-3">
+            <h4><a href="/ad/new">Agregar nuevo anuncio</a></h4>
+            </div>
+            </div>
         </div>
+        <div class="news">
+	    <h1 style="text-align:center">Anuncios</h1>
 	    <div class="row">
             <% var flag = true;
                ad.sort(function(a, b){
@@ -17,62 +26,38 @@
                     if(a.created > b.created) return -1;
                     return 0;
                     });   
-               ad.forEach(function(ad){
-               if(flag){ %>
-                    <div class="col-xs-1"></div>
-                    <!-- <div class="thumbnail"> -->
-                        <div class="col-xs-3">
-                            <img src="<%= ad.image %>" class="img-responsive img-rounded" alt="Responsive image" id="image">
-                        </div>    
-                        <div class="col-xs-7">
-                            <h1><a href="ad/<%=ad._id%>"><%= ad.title %></a></h1>
-            		        <h3> <%= ad.content.substring(0,100)+"..." %></h3>
-            		    
-            		    <% if(show){ %>
+               ad.forEach(function(ad){ %>
+                <div class="container separador">
+		    
+		        <div class="col-md-4 col-xs-12">
+		        	<div class="thumbnail home">
+		            	<img src="<%= ad.image %>" class="img-responsive img-rounded" alt="Responsive image" id="image">
+					</div>                        
+		        </div>    
+		        <div class="col-md-7 col-xs-12">
+		            <h1><a style="color:#387F21"href="ad/<%=ad._id%>"><%= ad.title %></a></h1>
+		            <h2>Publicado por: <%=ad.creator%></h2>
+		            <h3> <%= ad.content.substring(0,100)+"[...]" %></h3>
+		           <% if(show){ %>
                     	    <div class="row">
-                    		    <div class="col-md-2 col-sm-12 butt">
+                    		    <div class="col-md-1 col-xs-12 buttrigth">
                         		    <input type="button" class="btn btn-info butt"onclick="location.href='/ad/<%=ad._id%>/edit';" value="Editar" />
                         		</div>
-                        		<div class="col-md-2 col-sm-12 butt">
+                        		<div class="col-md-1 col-sm-12 butt">
                             		<form method="POST" action="/ad/<%=ad._id%>?_method=DELETE">
                             		    <button class="btn btn-danger">Eliminar</button>
                             		</form>
                         	    </div>
                             </div>
                         <% } %>
-                        </div>
-                        <div class="col-xs-1"></div>
-        			<!-- </div> -->
-        		    <% flag = !flag;
-        		    
-        	    }else{ %>
-            	    <div class="col-xs-1"></div>
-                    <!-- <div class="thumbnail"> -->
-                        <div class="col-xs-7">
-                            <h1><a href="ad/<%=ad._id%>"><%= ad.title %></a></h1>
-            		        <h3> <%= ad.content.substring(0,100)+"..." %></h3>
-            		        <% if(show){ %>
-                    	    <div class="row">
-                    		    <div class="col-md-2 col-sm-12 butt">
-                        		    <input type="button" class="btn btn-info butt"onclick="location.href='/ad/<%=ad._id%>/edit';" value="Editar" />
-                        		</div>
-                        		<div class="col-md-2 col-sm-12 butt">
-                            		<form method="POST" action="/ad/<%=ad._id%>?_method=DELETE">
-                            		    <button class="btn btn-danger">Eliminar</button>
-                            		</form>
-                        	    </div>
-                            </div>
-                        <% } %>
-                        </div>    
-                        <div class="col-xs-3">
-                            <img src="<%= ad.image %>" class="img-responsive img-rounded" alt="Responsive image" id="image">
-                        </div>
-                        <div class="col-xs-1"></div>
-        			<!-- </div> -->
-        			<% flag = !flag;
-        			
-            	  } %>
+		        </div>
+	        	<div class="col-md-1"></div>
+	        
+                </div>
+               
+              
             <% }); %>
+        </div>
         </div>
     </div>
     
