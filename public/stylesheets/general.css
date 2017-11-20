@@ -9,6 +9,7 @@
 
 body{
     background: #1c3b6d;
+    /*background: #100DAB;*/
     padding-top: 100px;
 }
 
@@ -34,6 +35,7 @@ body{
     height: 100%;
     width: 100%;
     background: #1c3b6d;
+    color: white;
     
 }
 
@@ -42,6 +44,7 @@ body{
 
 .navbar{
 	background: #779CD1;
+	/*background: #0099FE;*/
 	font-family: 'Quicksand', sans-serif;
 	opacity: 0.92;
 	margin-top: 15px;

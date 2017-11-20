@@ -43,13 +43,13 @@ router.get("/users/table", isLoggedIn, function(req, res){
 //===============================
 
 //REGISTER
-router.get("/register", isLoggedIn, function(req, res){
+router.get("/register", function(req, res){
     var user = req.user;
-    if(user.admin){
+    //if(user.admin){
         res.render("index/register", {user: user});	
-    }else{
-        res.redirect("/");
-    }
+    //}else{
+      //  res.redirect("/");
+    //}
 	
 });
 
@@ -68,16 +68,15 @@ router.post("/register", function(req, res){
             console.log(err);    //Falta manejar errores
             res.render("index/register");
         }else{
-            passport.authenticate("local")(req, res, function(){
-                News.find({}, function(err, news){
+            News.find({}, function(err, news){
                     if(err){
                         console.log("News "+ err);
                     }else{
-                        res.render("home",{user: currentUser, news: news});
+                        res.redirect("/users/table");
                     }
                 })
                 
-            });
+            
         }
     });
 });
