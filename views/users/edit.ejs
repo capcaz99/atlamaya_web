@@ -1,0 +1,28 @@
+<% include ../partials/header %>
+
+    <div class="container">
+			<div class="row">	
+				<div class="col-sm-2"></div>
+				<div class="col-sm-8">
+					<div class="jumbotron">
+					  <div class="inside">
+					  	<h2 class="h1F">Editar perfil</h2>
+					  	    <form method="POST" action="/user/<%=user._id%>?_method=PUT">
+                                <div class="form-group">
+                                    <label>Tel&eacute;fono</label>
+                                    <input type="number" class="form-control" value="<%=user.phone%>" name="user[phone]">
+                                </div>
+                                <div class="form-group">
+                                    <label>Referencia</label>
+                                    <input type="text" class="form-control" value="<%=user.reference%>" name="user[reference]">
+                                </div>
+                                <button class="btn btn-primary">Cambiar</button>
+                            </form>
+					  </div>
+					</div>	
+				</div>	
+				<div class="col-sm-2"></div>
+			</div>
+	</div>
+	
+<% include ../partials/footer %>

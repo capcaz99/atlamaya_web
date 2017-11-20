@@ -25,6 +25,7 @@ var maintenanceRoutes = require("./routes/maintenance"),
 	indexRoutes 	  = require("./routes/index"),
 	tableRoutes	      = require("./routes/table"),
 	newsRoutes		  = require("./routes/news"),
+	userRoutes		  = require("./routes/user"),
 	adRoutes		  = require("./routes/ad");
 	
 
@@ -72,9 +73,11 @@ app.use("/gallery", galleryRoutes);
 app.use("/photos", photosRoutes);
 app.use("/table",tableRoutes);
 app.use("/news",newsRoutes);
+app.use("/user",userRoutes);
 app.use("/ad", adRoutes);
 app.use(indexRoutes);
 app.use(adminRoutes);
+
 
 
 
