@@ -2,7 +2,9 @@ var Financial = require("../models/financial"),
     express     = require("express"),
     router      = express.Router({mergeParams: true});
     
-    
+const Upload = require('../upload/upload.server.controller');
+const multipart = require('connect-multiparty');
+const multipartMiddleware = multipart();    
 //===============================
 //Financial 
 //===============================
@@ -32,8 +34,9 @@ router.get("/new", isLoggedIn, function(req, res) {
 });
 
 //Create
-router.post("/", isLoggedIn, function(req, res){
-    
+router.post("/", isLoggedIn, multipartMiddleware, Upload.upload, function(req, res){
+	if(req.user.admin){
+    	req.body.financial.document = res.locals.url;
     	Financial.create(req.body.financial, function(err, financial){
     		if(err){
     			console.log(err);
@@ -41,6 +44,9 @@ router.post("/", isLoggedIn, function(req, res){
     			res.redirect("/financial");
     		}
     	});
+	}else{
+		res.redirect("/");
+	}
 });
 
 
@@ -62,7 +68,8 @@ router.get("/:id/edit", isLoggedIn, function(req, res) {
 });
 
 //Update
-router.put("/:id", isLoggedIn, function(req, res){
+router.put("/:id", isLoggedIn, multipartMiddleware, Upload.upload, function(req, res){
+	req.body.financial.document = res.locals.url;
 	Financial.findByIdAndUpdate(req.params.id, req.body.financial, function(err, financial){
 		if(err){
 			console.log(err);

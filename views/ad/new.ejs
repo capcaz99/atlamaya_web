@@ -7,7 +7,7 @@
 					<div class="jumbotron">
 					  <div class="inside">
 					  	<h2 class="h1F">Agrega un nuevo anuncio</h2>
-					    <form method="POST" action="/ad">
+					    <form method="POST" action="/ad" enctype="multipart/form-data">
 					        <div class="form-group">
 					            <label>Título</label>
 					            <input type="text" class="form-control" placeholder="Título" name="ad[title]">   
@@ -18,7 +18,7 @@
 					        </div>
 					        <div class="form-group">
 					            <label>Imagen</label>
-					            <input type="text" class="form-control" placeholder="Imagen" name="ad[image]">
+					            <input type="file" class="form-control" placeholder="Imagen" name="file">
 					        </div>
 					         <input type="hidden" value="<%=user.address%>" name="ad[creator]">
                             <button class="btn btn-primary">Agregar</button>

@@ -4,6 +4,11 @@ var Ad          = require("../models/ad"),
     express     = require("express"),
     router      = express.Router({mergeParams: true});
     
+        
+const Upload = require('../upload/upload.server.controller');
+const multipart = require('connect-multiparty');
+const multipartMiddleware = multipart();
+    
     
 //===============================
 //Ad 
@@ -55,8 +60,9 @@ router.get("/new", isLoggedIn, function(req, res) {
 });
 
 //Create
-router.post("/", isLoggedIn, function(req, res){
+router.post("/", isLoggedIn, multipartMiddleware, Upload.upload, function(req, res){
     var user = req.user;
+    req.body.ad.image = res.locals.url;
     Ad.create(req.body.ad, function(err, ad){
     		if(err){
     			console.log("Error al crear anuncio"+err);
@@ -102,7 +108,8 @@ router.get("/:id/edit", isLoggedIn, function(req, res) {
 });
 
 //Update
-router.put("/:id", isLoggedIn, function(req, res){
+router.put("/:id", isLoggedIn, multipartMiddleware, Upload.upload, function(req, res){
+	req.body.ad.image = res.locals.url;
     Ad.findByIdAndUpdate(req.params.id, req.body.ad, function(err, ad){
 			if(err){
 				console.log(err);

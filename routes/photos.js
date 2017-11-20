@@ -4,7 +4,10 @@ var Gallery     = require("../models/gallery"),
     express     = require("express"),
     router      = express.Router({mergeParams: true});
     
-    
+const Upload = require('../upload/upload.server.controller');
+const multipart = require('connect-multiparty');
+const multipartMiddleware = multipart();
+
 //===============================
 //Photos 
 //===============================
@@ -21,8 +24,9 @@ router.get("/new/:galleryId", isLoggedIn, function(req, res) {
 });
 
 //Create
-router.post("/:galleryId", isLoggedIn, function(req, res){
+router.post("/:galleryId", isLoggedIn, multipartMiddleware, Upload.upload, function(req, res){
     if(req.user.admin){
+        req.body.photo.image = res.locals.url;
         Photos.create(req.body.photo, function(err, photo){
     		if(err){
     			console.log(err);

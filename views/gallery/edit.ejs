@@ -8,14 +8,14 @@
 					<div class="jumbotron">
 					  <div class="inside">
 					  	<h2 class="h1F">Edita la galería</h2>
-                            <form method="POST" action="/gallery/<%=gallery._id%>?_method=PUT">					       
+                            <form method="POST" action="/gallery/<%=gallery._id%>?_method=PUT" enctype="multipart/form-data">					       
                             <div class="form-group">
 					            <label>Título</label>
 					            <input type="text" class="form-control" value="<%=gallery.title%>" name="gallery[title]">   
 					        </div>
 					        <div class="form-group">
 					            <label>Portada</label>
-					            <input type="text" class="form-control" value="<%=gallery.cover%>" name="gallery[cover]">
+					            <input type="file" class="form-control"  name="file">
 					        </div>
 					        
                             <button class="btn btn-primary">Aceptar</button>

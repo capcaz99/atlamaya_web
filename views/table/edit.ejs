@@ -9,14 +9,14 @@
 					<div class="jumbotron">
 					  <div class="inside">
 					  	<h2 class="h1F">Agregar un elemento de la mesa directiva</h2>
-                            <form method="POST" action="/table/<%=table._id%>?_method=PUT">					       
+                            <form method="POST" action="/table/<%=table._id%>?_method=PUT" enctype="multipart/form-data">					       
                             <div class="form-group">
 					            <label>Nombre</label>
 					            <input type="text" class="form-control" value="<%=table.name%>" name="table[name]">   
 					        </div>
 					        <div class="form-group">
 					            <label>Imagen</label>
-					            <input type="text" class="form-control" value="<%=table.image%>" name="table[image]">
+					            <input type="file" class="form-control" value="<%=table.image%>" name="file">
 					        </div>
 					        <div class="form-group">
 					            <label>Trabajo</label>

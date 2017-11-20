@@ -26,6 +26,7 @@ var maintenanceRoutes = require("./routes/maintenance"),
 	tableRoutes	      = require("./routes/table"),
 	newsRoutes		  = require("./routes/news"),
 	adRoutes		  = require("./routes/ad");
+	
 
 
 //%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Falta manejo de errores

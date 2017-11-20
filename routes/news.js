@@ -1,6 +1,12 @@
-var News = require("../models/news"),
+var News		= require("../models/news"),
     express     = require("express"),
+    request 	= require('request'),
     router      = express.Router({mergeParams: true});
+    
+    
+const Upload = require('../upload/upload.server.controller');
+const multipart = require('connect-multiparty');
+const multipartMiddleware = multipart();
     
     
 //===============================
@@ -20,16 +26,17 @@ router.get("/new", isLoggedIn, function(req, res) {
 });
 
 //Create
-router.post("/", isLoggedIn, function(req, res){
+router.post("/", isLoggedIn, multipartMiddleware, Upload.upload, function(req, res){
 	var user = req.user;
 	if(user.admin){
-			News.create(req.body.news, function(err, news){
-    		if(err){
-    			console.log(err);
-    		}else{
-    			res.redirect("/");
-    		}
-    	});
+		req.body.news.image = res.locals.url;
+		News.create(req.body.news, function(err, news){
+			if(err){
+				console.log(err);
+			}else{
+				res.redirect("/");
+			}
+		});
 	}else{
 		res.redirect("/");
 	}
@@ -67,7 +74,8 @@ router.get("/:id/edit", isLoggedIn, function(req, res) {
 });
 
 //Update
-router.put("/:id", isLoggedIn, function(req, res){
+router.put("/:id", isLoggedIn, multipartMiddleware, Upload.upload, function(req, res){
+	req.body.news.image = res.locals.url;
 	News.findByIdAndUpdate(req.params.id, req.body.news, function(err, news){
 		if(err){
 			console.log(err);

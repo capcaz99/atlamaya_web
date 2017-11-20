@@ -4,8 +4,7 @@ var financialSchema = mongoose.Schema({
     document: String,
     title: String,
     created: {type: Date, default:Date.now},
-    description: String,
-    image: String
+    description: String
 });
 
 module.exports = mongoose.model("Financial", financialSchema);

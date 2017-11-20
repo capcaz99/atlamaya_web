@@ -4,7 +4,10 @@ var Gallery     = require("../models/gallery"),
     express     = require("express"),
     router      = express.Router({mergeParams: true});
     
-    
+const Upload = require('../upload/upload.server.controller');
+const multipart = require('connect-multiparty');
+const multipartMiddleware = multipart();
+        
 //===============================
 //Gallery 
 //===============================
@@ -23,7 +26,7 @@ router.get("/", isLoggedIn, function(req, res) {
 
 
 //New
-router.get("/new", isLoggedIn, function(req, res) {
+router.get("/new", isLoggedIn,  function(req, res) {
 	var user = req.user;
 	if(req.user.admin){
 	    res.render("gallery/new",{user: user});  
@@ -33,9 +36,10 @@ router.get("/new", isLoggedIn, function(req, res) {
 });
 
 //Create
-router.post("/", isLoggedIn, function(req, res){
+router.post("/", isLoggedIn, multipartMiddleware, Upload.upload, function(req, res){
     var user = req.user;
     if (user.admin){
+    	req.body.gallery.cover = res.locals.url;
         Gallery.create(req.body.gallery, function(err, gallery){
     		if(err){
     			console.log(err);
@@ -81,8 +85,9 @@ router.get("/:id/edit", isLoggedIn, function(req, res) {
 });
 
 //Update
-router.put("/:id", isLoggedIn, function(req, res){
+router.put("/:id", isLoggedIn, multipartMiddleware, Upload.upload, function(req, res){
 	if(req.user.admin){
+		req.body.gallery.cover = res.locals.url;
 		Gallery.findByIdAndUpdate(req.params.id, req.body.gallery, function(err, gallery){
 			if(err){
 				console.log(err);

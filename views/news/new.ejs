@@ -9,14 +9,14 @@
 					<div class="jumbotron">
 					  <div class="inside">
 					  	<h2 class="h1F">Agregar nueva noticia</h2>
-                            <form method="POST" action="/news">					       
+                            <form method="POST" action="/news" enctype="multipart/form-data">					       
                             <div class="form-group">
 					            <label>Título</label>
 					            <input type="text" class="form-control" placeholder="Título" name="news[title]">   
 					        </div>
 					        <div class="form-group">
 					            <label>Imagen</label>
-					            <input type="text" class="form-control" placeholder="Imagen" name="news[image]">
+					            <input type="file" class="form-control" placeholder="Imagen" name="file">
 					        </div>
 					        <div class="form-group">
 					            <label>Contenido</label>

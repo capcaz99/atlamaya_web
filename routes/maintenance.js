@@ -1,7 +1,12 @@
 var Maintenance = require("../models/maintenance"),
     express     = require("express"),
     router      = express.Router({mergeParams: true});
-    
+
+
+const Upload = require('../upload/upload.server.controller');
+const multipart = require('connect-multiparty');
+const multipartMiddleware = multipart();
+        
     
 //===============================
 //Maintenance
@@ -32,8 +37,8 @@ router.get("/new", isLoggedIn, function(req, res) {
 });
 
 //Create
-router.post("/", isLoggedIn, function(req, res){
-    
+router.post("/", isLoggedIn, multipartMiddleware, Upload.upload,function(req, res){
+    req.body.maintenance.image = res.locals.url;
     	Maintenance.create(req.body.maintenance, function(err, maintenance){
     		if(err){
     			console.log(err);
@@ -62,7 +67,8 @@ router.get("/:id/edit", isLoggedIn, function(req, res) {
 });
 
 //Update
-router.put("/:id", isLoggedIn, function(req, res){
+router.put("/:id", isLoggedIn, multipartMiddleware, Upload.upload, function(req, res){
+	req.body.maintenance.image = res.locals.url;
 	Maintenance.findByIdAndUpdate(req.params.id, req.body.maintenance, function(err, maintenance){
 		if(err){
 			console.log(err);

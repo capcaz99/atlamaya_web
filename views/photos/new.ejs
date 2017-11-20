@@ -8,10 +8,11 @@
 					<div class="jumbotron">
 					  <div class="inside">
 					  	<h2 class="h1F">Agregar una foto</h2>
-                            <form method="POST" action="/photos/<%= galleryId %>">					       
+                            <form method="POST" action="/photos/<%= galleryId %>" enctype="multipart/form-data">					       
                             <div class="form-group">
 					            <label>Imagen</label>
-					            <input class="form-control" type="text" placeholder="Foto" name="photo[image]">   
+					            <input class="form-control" type="file" placeholder="Foto" name="file">   
+					            <input class="form-control" type="hidden" placeholder="Foto" name="photo[image]">
 					        </div>
                             <button class="btn btn-primary">Aceptar</button>
                         </form>

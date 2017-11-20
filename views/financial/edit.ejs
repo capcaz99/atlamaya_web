@@ -8,14 +8,10 @@
 					<div class="jumbotron">
 					  <div class="inside">
 					  	<h2 class="h1F">Editar el estado financiero</h2>
-                            <form method="POST" action="/financial/<%=financial._id%>?_method=PUT">					       
+                            <form method="POST" action="/financial/<%=financial._id%>?_method=PUT" enctype="multipart/form-data">					       
                             <div class="form-group">
 					            <label>Título</label>
 					            <input type="text" class="form-control" value="<%=financial.title%>" name="financial[title]">   
-					        </div>
-					        <div class="form-group">
-					            <label>Imagen</label>
-					            <input type="text" class="form-control" value="<%=financial.image%>" name="financial[image]">
 					        </div>
 					        <div class="form-group">
 					            <label>Contenido</label>
@@ -23,7 +19,7 @@
 					        </div>
 					        <div class="form-group">
 					            <label>Documento</label>
-					            <input type="text" class="form-control" value="<%=financial.document%>" name="financial[document]">
+					            <input type="file" class="form-control"  name="file">
 					        </div>
 					        
                             <button class="btn btn-primary">Aceptar</button>

@@ -9,14 +9,14 @@
 					<div class="jumbotron">
 					  <div class="inside">
 					  	<h2 class="h1F">Agrega una galería</h2>
-                           <form method="POST" action="/gallery">				       
+                           <form method="POST" action="/gallery" enctype="multipart/form-data">				       
                             <div class="form-group">
 					            <label>Título</label>
                                 <input type="text" class="form-control" placeholder="Nombre" name="gallery[title]">
                             </div>
 					        <div class="form-group">
 					            <label>Portada</label>
-					            <input type="text" class="form-control" placeholder="Foto de portada" name="gallery[cover]">
+					            <input type="file" class="form-control" placeholder="Foto de portada" name="file">
 					        </div>
 					        <input type="hidden" value="false" name="gallery[historic]">
                             <p>Para agregar fotos a la galer&iacute;a da click en la portada una vez que se haya creado.</p>

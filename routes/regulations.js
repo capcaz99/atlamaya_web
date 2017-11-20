@@ -2,7 +2,10 @@ var Regulation = require("../models/regulation"),
     express     = require("express"),
     router      = express.Router({mergeParams: true});
     
-    
+const Upload = require('../upload/upload.server.controller');
+const multipart = require('connect-multiparty');
+const multipartMiddleware = multipart();
+
 //===============================
 //Regulations
 //===============================
@@ -32,8 +35,8 @@ router.get("/new", isLoggedIn, function(req, res) {
 });
 
 //Create
-router.post("/", isLoggedIn, function(req, res){
-    
+router.post("/", isLoggedIn, multipartMiddleware, Upload.upload, function(req, res){
+    	req.body.regulation.document = res.locals.url;
     	Regulation.create(req.body.regulation, function(err, regulation){
     		if(err){
     			console.log(err);
@@ -62,7 +65,8 @@ router.get("/:id/edit", isLoggedIn, function(req, res) {
 });
 
 //Update
-router.put("/:id", isLoggedIn, function(req, res){
+router.put("/:id", isLoggedIn, multipartMiddleware, Upload.upload, function(req, res){
+	req.body.regulation.document = res.locals.url;
 	Regulation.findByIdAndUpdate(req.params.id, req.body.regulation, function(err, regulation){
 		if(err){
 			console.log(err);

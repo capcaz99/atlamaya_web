@@ -2,6 +2,9 @@ var Table    = require("../models/table"),
     express = require("express"),
     router  = express.Router();
 
+const Upload = require('../upload/upload.server.controller');
+const multipart = require('connect-multiparty');
+const multipartMiddleware = multipart();
 
 //===============================
 //Table
@@ -32,7 +35,8 @@ router.get("/new", isLoggedIn, function(req, res) {
 });
 
 //Create
-router.post("/", isLoggedIn, function(req, res){
+router.post("/", isLoggedIn, multipartMiddleware, Upload.upload, function(req, res){
+	req.body.table.image = res.locals.url;
 	Table.create(req.body.table, function(err, table){
 		if(err){
 			console.log(err);
@@ -60,7 +64,8 @@ router.get("/:id/edit", isLoggedIn, function(req, res) {
 });
 
 //Update
-router.put("/:id", isLoggedIn, function(req, res){
+router.put("/:id", isLoggedIn, multipartMiddleware, Upload.upload, function(req, res){
+	req.body.table.image = res.locals.url;
 	Table.findByIdAndUpdate(req.params.id, req.body.table, function(err, table){
 		if(err){
 			console.log(err);
