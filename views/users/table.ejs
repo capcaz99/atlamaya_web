@@ -16,6 +16,7 @@
                     
                     <th>Nombre de usuario</th>
                     <th>Dirección</th>
+                    <th>Email</th>
                     <th>Tel&eacute;fono</th>
                     <th>Referencia Bancaria</th>
                     <th>Bloqueado</th>
@@ -31,6 +32,7 @@
                     <tr>
                         <th><a href="/user/edit/<%=otherUser._id %>"><%=otherUser.username %></a></th>                
                         <th><%=otherUser.address %></th>                
+                        <th><%=otherUser.email %></th>                
                         <th><%=otherUser.phone %></th>                
                         <th><%=otherUser.reference %></th>   
                         <% if (otherUser.blocked){ %>

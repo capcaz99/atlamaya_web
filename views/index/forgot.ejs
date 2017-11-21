@@ -14,21 +14,19 @@
 				<div class="col-sm-2"></div>
 				<div class="col-sm-8">
 					<div class="jumbotron">
-						<h2 class="h1F">&#161Bienvenido a Atlamaya!</h2>
-						<h4>Por favor ingresa tus datos para acceder a la p&aacutegina</h4>
-						<form method="POST" action="/login">
+						<h2 class="h1F">¿Olvidaste tu contrase&ntilde;a?</h2>
+						<h4>Por favor ingresa tus datos para poder restaurar tu contraseña</h4>
+						<form method="POST" action="/forgotPassword">
 							<div class="form-group">
 							 	<label for="exampleInputEmail1">Nombre de Usuario</label>
 							 	<input type="text" class="form-control" placeholder="Tlapacoya7" name="username" required>
 							</div>
 					 		<div class="form-group">
-								<label for="exampleInputPassword1">Contrase&ntilde;a</label>
-								<input type="password" class="form-control" placeholder="Contraseña" name="password" required>
+								<label for="exampleInputPassword1">Email</label>
+								<input type="email" class="form-control" placeholder="Email" name="email" required>
 					 		</div>
-					 		<div class="form-group">
-					 			<a href="/forgotPassword">¿Olvidaste tu contrase&ntilde;a?</a>
-							</div>
-    						<button class="btn btn-primary">Ingresar</button>
+						
+    						<button class="btn btn-primary">Enviar correo</button>
     						
 						</form>
 					</div>	

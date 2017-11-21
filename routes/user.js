@@ -145,22 +145,28 @@ router.get("/password", isLoggedIn, function(req, res){
 });
 
 router.put("/password/:id", isLoggedIn, function(req,res){
-   User.findByUsername(req.user.username).then(function(sanitizedUser){
-    if (sanitizedUser){
-        sanitizedUser.setPassword(req.body.password, function(){
-            sanitizedUser.save();
-            res.redirect("/");
-        });
-    } else {
-        res.status(500).json({message: 'This user does not exist'});
-    }
-},function(err){
-    console.error(err);
+   if(req.user._id == req.params.id){	
+	   User.findByUsername(req.user.username).then(function(sanitizedUser){
+	    if (sanitizedUser){
+	        sanitizedUser.setPassword(req.body.password, function(){
+	            sanitizedUser.save();
+	            res.redirect("/");
+	        });
+	    } else {
+	        res.status(500).json({message: 'This user does not exist'});
+	    }
+	},function(err){
+	    console.error(err);
+		
+	});}
+	else{
+		res.redirect("/");
+	}
 });
 
 
     
-});
+
 function isLoggedIn(req, res, next){
     if(req.isAuthenticated()){
         return next();

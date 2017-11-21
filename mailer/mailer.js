@@ -17,7 +17,7 @@ var mailOptions = {
   text: 'Para poder cambiar tu contraseña ve a este link para hacerlo: '
 };
 
-module.exports = transporter;
+
 transporter.sendMail(mailOptions, function(error, info){
   if (error) {
     console.log(error);

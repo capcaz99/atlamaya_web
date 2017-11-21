@@ -1,8 +1,9 @@
-var User     = require("../models/user.js"),
-    News     = require("../models/news.js"),
-    passport = require("passport"),
-    express  = require("express"),
-    router   = express.Router();
+var User       = require("../models/user.js"),
+    News       = require("../models/news.js"),
+    nodemailer = require('nodemailer'),
+    passport   = require("passport"),
+    express    = require("express"),
+    router     = express.Router();
     
     
     
@@ -61,6 +62,7 @@ router.post("/register", function(req, res){
 	  						    username  : req.body.username,
 	  							address   : req.body.address,
 	  							phone     : req.body.phone,
+	  							email     : req.body.email,
 	  							reference : req.body.reference,
 	  							blocked   : req.body.blocked,
 	  							admin     : req.body.admin
@@ -111,5 +113,30 @@ function isLoggedIn(req, res, next){
 
 
 
+//===============================
+//Forgot Password
+//===============================
+
+router.get("/forgotPassword", function(req, res) {
+    res.render("index/forgot");
+});
+
+router.post("/forgotPassword", function(req,res){
+    User.findByUsername(req.body.username, function(err, user){
+        if(err){
+            console.log("Usuario mal puesto");
+            res.redirect("/forgotPassword");
+        }else{
+            if(user.email == req.body.email){
+                console.log("Correcto");
+            }else{
+                console.log("Error");
+                res.redirect("/forgotPassword");
+            }
+        }
+    });
+    
+});
 
 module.exports = router;
+
