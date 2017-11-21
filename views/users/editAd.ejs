@@ -7,7 +7,9 @@
 					<div class="jumbotron">
 					  <div class="inside">
 					  	<h2 class="h1F">Editar perfil</h2>
-					  	<h3>Se deben seleccionar ambos atributos</h3>
+					  	<form method="POST" action="/user/<%=idUser%>?_method=DELETE">
+					  	<button class="btn btn-danger">Eliminar usuario</button>
+					  	</form>
 					  	    <form method="POST" action="/user/<%=idUser%>?_method=PUT">
                                 <div class="form-group">
                                     <label>Bloqueado</label>

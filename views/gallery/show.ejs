@@ -8,6 +8,9 @@
   			<h1><%= gallery.title %></h1>
   			<% if(user.admin){ %>
           <a class="btn btn-success" href="/photos/new/<%=gallery._id%>">Agregar foto</a>
+          <form method="POST" action="/gallery/<%=gallery._id%>?_method=DELETE">
+					  	<button class="btn btn-danger">Eliminar galeria</button>
+					 </form>
         <% } %>
 		</div>
 	</div>

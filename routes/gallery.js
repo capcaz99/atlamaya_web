@@ -105,22 +105,24 @@ router.put("/:id", isLoggedIn, multipartMiddleware, Upload.upload, function(req,
 //Destroy
 router.delete("/:id", isLoggedIn, function(req, res){
 	if(req.user.admin){
-	    Gallery.findById(req.body._id, function(err, gallery){
+	    Gallery.findById(req.params.id, function(err, gallery){
 		    if(err){
 		        console.log("Error encontrando la galeria"+err);
 		    }else{
+		    	
+		    	if(gallery.photos.length >0){
 		        var cont = 0;
 		        var max  = gallery.photos.length;
 		        gallery.photos.forEach(function(photos){
-		            Photos.findByIdAndRemove(photos._id, function(err){
+		            Photos.findByIdAndRemove(photos, function(err){
     		            if(err){
     		                console.log("Error al eliminar foto"+err);
     		            }else{
+    		            	
     		                cont++;
     		            } 
-		            });
 		            if(cont == max){
-    		            Gallery.findByIdAndRemove(req.body._id, function(err){
+    		            Gallery.findByIdAndRemove(req.params.id, function(err){
     		                if(err){
     		                    console.log("Error al eliminar galeria"+err);
     		                }else{
@@ -128,7 +130,17 @@ router.delete("/:id", isLoggedIn, function(req, res){
     		                }
     		            });
 		            }
+		          });
     		    });
+		    	}else{
+		    		Gallery.findByIdAndRemove(req.params.id, function(err){
+    		                if(err){
+    		                    console.log("Error al eliminar galeria"+err);
+    		                }else{
+    		                    res.redirect("/gallery");
+    		                }
+    		            });
+		    	}	
 		    }
 	    });
 	}else{

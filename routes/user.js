@@ -1,4 +1,6 @@
 var User     = require("../models/user.js"),
+    Payment  = require("../models/payment"),
+    Ad       = require("../models/ad"),
     passport = require("passport"),
     express  = require("express"),
     router   = express.Router();
@@ -23,9 +25,55 @@ router.put("/:id", isLoggedIn, function(req, res){
 			    res.redirect("/users/table");
 			}
 		});	
-
-	
 });
+
+//Destroy
+router.delete("/:id", isLoggedIn, function(req, res){
+	if(req.user.admin){
+		User.findById(req.params.id, function(err, user){
+			if(err){
+			    console.log(err);
+			}else{
+			    var cont = 0;
+			    var max = user.payments.length;
+			    user.payments.forEach(function(payment){
+			        Payment.findByIdAndRemove(payment._id, function(err){
+    		            if(err){
+    		                console.log("Error al eliminar pago"+err);
+    		            }else{
+    		                cont++;
+    		            } 
+		            });
+		            if(cont == max){
+		                cont = 0;
+		                max = user.ads.length;
+		                user.ads.forEach(function(ad){
+			                Ad.findByIdAndRemove(ad._id, function(err){
+    		                    if(err){
+    		                        console.log("Error al eliminar anuncio"+err);
+    		                    }else{
+    		                        cont++;
+    		                    } 
+		                    });
+		                    if(cont == max){
+		                        User.findByIdAndRemove(req.params.id, function(err){
+    		                        if(err){
+    		                            console.log("Error al eliminar usuario"+err);
+    		                        }else{
+    		                            res.redirect("/users/table");
+    		                        }
+		                        });
+			                }
+		                });
+		            }
+			     });
+			}
+		});
+	}else{
+		res.redirect("/");
+	}
+});
+
 
 //------------------------------------------------
 //Password
@@ -48,6 +96,8 @@ router.put("/password/:id", isLoggedIn, function(req,res){
 },function(err){
     console.error(err);
 });
+
+
     
 });
 function isLoggedIn(req, res, next){
