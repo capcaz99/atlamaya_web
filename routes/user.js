@@ -119,22 +119,8 @@ router.delete("/:id", isLoggedIn, function(req, res){
 	}
 });
 			    
-			   
-
-
-			    
-			   
-
-
-			    
-			   
-
-
-			    
-			   
-
-
-
+		    
+	
 
 //------------------------------------------------
 //Password
@@ -164,6 +150,29 @@ router.put("/password/:id", isLoggedIn, function(req,res){
 	}
 });
 
+//Para envío de email.
+
+router.get("/password/:id",  function(req, res){
+	       res.render("users/passwordOut",{id:req.params.id});
+    
+});
+
+router.put("/passwordOut/:id", function(req,res){	
+	   User.findById(req.params.id).then(function(sanitizedUser){
+	    if (sanitizedUser){
+	        sanitizedUser.setPassword(req.body.password, function(){
+	            sanitizedUser.save();
+	            res.redirect("/");
+	        });
+	    } else {
+	        res.status(500).json({message: 'This user does not exist'});
+	    }
+	},function(err){
+	    console.error(err);
+		
+	});
+	
+});
 
     
 

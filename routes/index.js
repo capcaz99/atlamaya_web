@@ -121,14 +121,45 @@ router.get("/forgotPassword", function(req, res) {
     res.render("index/forgot");
 });
 
+router.get("/email/:user",function(req, res) {
+    res.render("index/email",{user:req.params.user});
+});
+
 router.post("/forgotPassword", function(req,res){
-    User.findByUsername(req.body.username, function(err, user){
+    User.findByUsername(req.body.username, function(err, use){
         if(err){
             console.log("Usuario mal puesto");
             res.redirect("/forgotPassword");
         }else{
-            if(user.email == req.body.email){
+            if(use.email == req.body.email){
                 console.log("Correcto");
+                var transporter = nodemailer.createTransport({
+                  service: 'gmail',
+                  auth: {
+                    user: 'condominioatlamaya@gmail.com',
+                    pass: ''
+                  }
+                });
+                
+                
+                
+                var mailOptions = {
+                  from: 'condominioatlamaya@gmail.com',
+                  to: req.body.email,
+                  subject: 'Cambio de contraseña',
+                  text: 'Para poder cambiar tu contraseña ve a este link para hacerlo: https://atlamaya-web-capcaz99.c9users.io/user/password/'+use._id
+                            
+                };
+                
+                
+                transporter.sendMail(mailOptions, function(error, info){
+                  if (error) {
+                    console.log(error);
+                  } else {
+                    console.log('Email sent: ' + info.response);
+                    res.redirect("/email/"+use.email);
+                  }
+                });
             }else{
                 console.log("Error");
                 res.redirect("/forgotPassword");
