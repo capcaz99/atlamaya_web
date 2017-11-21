@@ -34,45 +34,106 @@ router.delete("/:id", isLoggedIn, function(req, res){
 			if(err){
 			    console.log(err);
 			}else{
-			    var cont = 0;
-			    var max = user.payments.length;
-			    user.payments.forEach(function(payment){
-			        Payment.findByIdAndRemove(payment._id, function(err){
-    		            if(err){
-    		                console.log("Error al eliminar pago"+err);
-    		            }else{
-    		                cont++;
-    		            } 
-		            });
-		            if(cont == max){
-		                cont = 0;
-		                max = user.ads.length;
-		                user.ads.forEach(function(ad){
-			                Ad.findByIdAndRemove(ad._id, function(err){
-    		                    if(err){
-    		                        console.log("Error al eliminar anuncio"+err);
-    		                    }else{
-    		                        cont++;
-    		                    } 
-		                    });
-		                    if(cont == max){
-		                        User.findByIdAndRemove(req.params.id, function(err){
-    		                        if(err){
-    		                            console.log("Error al eliminar usuario"+err);
-    		                        }else{
-    		                            res.redirect("/users/table");
-    		                        }
-		                        });
-			                }
+				if(user.payments.length >0){
+					var cont = 0;
+			    	var max = user.payments.length;
+			    	user.payments.forEach(function(payment){
+			    		Payment.findByIdAndRemove(payment, function(err){
+	    		            if(err){
+	    		                console.log("Error al eliminar pago"+err);
+	    		            }else{
+	    		                cont++;
+	    		            }
+				    		if(cont ==max){
+				    			if(user.ads.length >0){
+				    				cont = 0;
+				    				max = user.ads.length;
+				    				user.ads.forEach(function(ad){
+					    				Ad.findByIdAndRemove(ad, function(err){
+		    		                    	if(err){
+		    		                       		console.log("Error al eliminar anuncio"+err);
+		    		                    	}else{
+		    		                        	cont++;
+		    		                    	} 
+				                    	
+					                    	if(cont == max){
+					                    		User.findByIdAndRemove(req.params.id, function(err){
+				    		                        if(err){
+				    		                            console.log("Error al eliminar usuario"+err);
+				    		                        }else{
+				    		                            res.redirect("/users/table");
+			    		                        	}
+					                        	});
+					                    	}
+				                    	});
+				                    });
+				    			}else{
+				    				User.findByIdAndRemove(req.params.id, function(err){
+		    		                	if(err){
+		    		                    	console.log("Error al eliminar usuario"+err);
+		    		                    }else{
+		    		                    	res.redirect("/users/table");
+	    		                        }
+			                        });
+				    			}
+				    		}
+				    	});
+			    	});
+			    }else{
+			    	if(user.ads.length >0){
+			    		var cont = 0;
+			    		var max = user.ads.length;
+			    		user.ads.forEach(function(ad){
+		    				Ad.findByIdAndRemove(ad, function(err){
+		                    	if(err){
+		                       		console.log("Error al eliminar anuncio"+err);
+		                    	}else{
+		                        	cont++;
+		                    	} 
+		                	
+		                    	if(cont == max){
+		                    		User.findByIdAndRemove(req.params.id, function(err){
+				                        if(err){
+				                            console.log("Error al eliminar usuario"+err);
+				                        }else{
+				                            res.redirect("/users/table");
+			                        	}
+		                        	});
+		                    	}
+		                	});
 		                });
-		            }
-			     });
+	               	}else{
+				    	User.findByIdAndRemove(req.params.id, function(err){
+		                	if(err){
+		                    	console.log("Error al eliminar usuario"+err);
+		                    }else{
+		                    	res.redirect("/users/table");
+		                    }
+		                });
+				    }
+			    }
 			}
-		});
+		});		
 	}else{
 		res.redirect("/");
 	}
 });
+			    
+			   
+
+
+			    
+			   
+
+
+			    
+			   
+
+
+			    
+			   
+
+
 
 
 //------------------------------------------------
