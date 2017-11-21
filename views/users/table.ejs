@@ -29,7 +29,7 @@
                     }); %>
                 <% allUsers.forEach(function(otherUser){ %>
                     <tr>
-                        <th><%=otherUser.username %></th>                
+                        <th><a href="/user/edit/<%=otherUser._id %>"><%=otherUser.username %></a></th>                
                         <th><%=otherUser.address %></th>                
                         <th><%=otherUser.phone %></th>                
                         <th><%=otherUser.reference %></th>   

@@ -7,6 +7,7 @@
 					<div class="jumbotron">
 					  <div class="inside">
 					  	<h2 class="h1F">Editar perfil</h2>
+					  		<h3><a href="/user/password">Cambiar tu contrase&ntilde;a</a></h3>
 					  	    <form method="POST" action="/user/<%=user._id%>?_method=PUT">
                                 <div class="form-group">
                                     <label>Tel&eacute;fono</label>
@@ -16,6 +17,7 @@
                                     <label>Referencia</label>
                                     <input type="text" class="form-control" value="<%=user.reference%>" name="user[reference]">
                                 </div>
+                                
                                 <button class="btn btn-primary">Cambiar</button>
                             </form>
 					  </div>

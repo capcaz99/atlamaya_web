@@ -35,6 +35,8 @@ router.get("/users/table", isLoggedIn, function(req, res){
                 res.render("users/table", {user: user, allUsers:allUsers});
             }
         })
+    }else{
+        res.redirect("/");
     }
 })
 
