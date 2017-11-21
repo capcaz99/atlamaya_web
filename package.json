@@ -5,6 +5,8 @@
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
+    "encrypt": "encrypt config.json config.json.cast5",
+    "decrypt": "decrypt config.json.cast5 config.json"
   },
   "repository": {
     "type": "git",
@@ -19,6 +21,7 @@
   "dependencies": {
     "aws-sdk": "^2.153.0",
     "body-parser": "^1.17.2",
+    "config-leaf": "^0.3.0",
     "connect-multiparty": "^2.1.0",
     "ejs": "^2.5.7",
     "express": "^4.15.4",
