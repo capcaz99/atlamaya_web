@@ -28,7 +28,6 @@
 			        <span class="icon-bar"></span>
 			        <span class="icon-bar"></span>
 			     </button>
-				<!-- <a href="/"  id="logo"class="navbar-brand"><img id="logo" src="logotipo.png" ></a> -->
 				<a href="/"  id="logo"class="navbar-brand">Atlamaya</a>
 			</div>
 
@@ -44,7 +43,7 @@
 				        </ul>
 			        </li>
 
-					<li class="line"><a href="/payments"> Pagos de Mantenimiento</a></li>
+					
 					<li class="line"><a href="/regulation"> Reglamentos CDMX</a></li>
 					<li class="line"><a href="/gallery">Fotos</a></li>
 				<!--	<li class="dropdown line">
@@ -55,12 +54,22 @@
 				            
 				        </ul>
 			        </li> -->
+			        
 					<li ><a class="line" href="/ad"> Anuncios</a></li>
-					<li><a href="/user">Perfil</a></li>
 					<% if(user.admin){  %>
 					<li><a href="/administrador">Administrador</a></li>
 					<% } %>
-					<li><a href="/logout"> Salir</a></li>
+						<li class="dropdown line">
+          				<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> Perfil <span class="caret"></span></a>
+			          	<ul class="dropdown-menu">
+				            <li><a href="/user">Ver datos</a></li>
+				            <li class="line"><a href="/payments"> Pagos de Mantenimiento</a></li>
+				            <li><a href="/logout"> Salir</a></li>
+				        </ul>
+			        </li>
+					
+					
+				
 					 
 					  
 				</ul>
