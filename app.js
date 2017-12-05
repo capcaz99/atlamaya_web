@@ -2,6 +2,7 @@ var passportLocalMongoose = require("passport-local-mongoose"),
     methodOverride        = require("method-override"),
 	LocalStrategy         = require("passport-local"),
 	User                  = require("./models/user"),
+	flash				  = require("connect-flash"),
 	serveStatic 		  = require('serve-static'),
 	bodyParser            = require("body-parser"),
 	mongoose              = require("mongoose"),
@@ -30,10 +31,11 @@ var maintenanceRoutes = require("./routes/maintenance"),
 	
 
 
-//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Falta manejo de errores
+
 
 app.use(express.static("public"));
 app.use(express.static("images"));
+app.use(flash());
 app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");
 app.use(methodOverride("_method"));

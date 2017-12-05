@@ -20,6 +20,7 @@
     "aws-sdk": "^2.153.0",
     "body-parser": "^1.17.2",
     "config-leaf": "^0.3.0",
+    "connect-flash": "^0.1.1",
     "connect-multiparty": "^2.1.0",
     "dotenv": "^4.0.0",
     "ejs": "^2.5.7",
