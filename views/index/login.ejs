@@ -9,23 +9,23 @@
 	
 </head>
 <body>  
-<div class="container">
-		<% if(error && error.length >0){ %> 
-			<div class="alert alert-danger" role="alert">
-				<%= error %>
-			</div>
-		<% } %> 
-		<% if(success && success.length >0){ %>
-			<div class="alert alert-success" role="alert">
-				<%= success %>
-			</div>
-		<% } %> 
-	</div>
     <div class="container padd">
 			<div class="row">	
 				<div class="col-sm-2"></div>
 				<div class="col-sm-8">
 					<div class="jumbotron">
+						<div class="container">
+							<% if(error && error.length >0){ %> 
+								<div class="alert alert-danger" role="alert">
+									<%= error %>
+								</div>
+							<% } %> 
+							<% if(success && success.length >0){ %>
+								<div class="alert alert-success" role="alert">
+									<%= success %>
+								</div>
+							<% } %> 
+						</div>
 						<h2 class="h1F">&#161Bienvenido a Atlamaya!</h2>
 						<h4>Por favor ingresa tus datos para acceder a la p&aacutegina</h4>
 						<form method="POST" action="/login">
