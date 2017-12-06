@@ -61,6 +61,12 @@ passport.deserializeUser(User.deserializeUser());
 //Body Parser
 app.use(bodyParser.urlencoded({extended: true}));
 
+//Local variables 
+app.use(function(req, res, next){
+	res.locals.error = req.flash("error");
+	res.locals.success = req.flash("success");
+	next();
+});
 //Serve Static
 app.use(serveStatic('atlamaya_web/images'));
 

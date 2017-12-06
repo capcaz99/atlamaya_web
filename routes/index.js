@@ -137,7 +137,7 @@ router.post("/forgotPassword", function(req,res){
                   service: 'gmail',
                   auth: {
                     user: 'condominioatlamaya@gmail.com',
-                    pass: ''
+                    pass: 'Carlos@1812'
                   }
                 });
                 
