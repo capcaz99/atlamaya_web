@@ -98,7 +98,7 @@ router.get("/:id", isLoggedIn, function(req, res){
 		if(err){
 			console.log("Error en show de ad"+ err);
 			req.flash("error","Hubo un error buscando el anuncio, vuelve a intentarlo.");
-    		res.redirect("/ad/new");
+    		res.redirect("/ad");
 		}else{
 			res.render("ad/show", {user: user, ad: ad});
 		}
