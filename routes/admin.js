@@ -10,7 +10,8 @@ router.get("/administrador", isLoggedIn, function(req, res) {
 	if(user.admin){
 		res.render("administrador", {user: user});
 	}else{
-		res.redirect("/"); //%%%%%%%%%%%%%Agregar mensaje de error
+	    req.flash("error","Debes ser administrador para ingresar a esa página.");
+		res.redirect("/"); 
 	}
     
 });
@@ -22,6 +23,7 @@ function isLoggedIn(req, res, next){
     if(req.isAuthenticated()){
         return next();
     }
+    req.flash("error","Debes iniciar sesión para ingresar a esa página.");
     res.redirect("/login");
 }	
 

@@ -18,6 +18,10 @@
     
     
 }
+
+#notificaciones{
+    padding-top: 100px;
+}
 @media (max-width: 1200px) {
     .butt{
     padding-bottom: 5px;
